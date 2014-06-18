@@ -1,0 +1,8 @@
+*.pyc
+
+# Virtualenv
+venv
+.env
+
+# OSX
+.DS_Store
