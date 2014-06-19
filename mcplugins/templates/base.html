@@ -1,0 +1,59 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/google.html" as google %}
+
+{% block title %}MC plugins{% endblock %}
+
+{% block styles %}
+<link href="{{ url_for('static', filename='css/styles.css') }}"  rel="stylesheet">
+{{ super() }}
+
+<!-- Fonts -->
+<link href='http://maxcdn.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css' rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Raleway:400,700'  rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700'  rel="stylesheet" type="text/css">
+
+{% endblock %}
+
+{% block navbar %}
+<header class="header">
+  <div id="main-nav" class="navbar navbar-inverse bs-docs-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header responsive-logo">
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="./" class="navbar-brand">
+          <img src="{{ url_for('static', filename='img/logo.png') }}" alt="MC Plugins">
+        </a>
+      </div>
+      <nav class="navbar-collapse bs-navbar-collapse collapse" role="navigation" style="height: 1px;">
+        <ul class="nav navbar-nav navbar-right responsive-nav main-nav-list">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#aboutus">About Us</a></li>
+          <li><a href="#pricingtable">Pricing</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+<script src="{{ url_for('static', filename='js/jquery.nav.js') }}"></script>
+<!-- Custom JS -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+<!--{{google.analytics(account="")}}-->
+
+{% endblock %}
+
