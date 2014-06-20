@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "navbar_base.html" %}
 
 {% block content %}
 <img class="parallax-background" src="{{ url_for('static', filename='img/background.png') }}"></img>
@@ -33,30 +33,23 @@
 <section class="about-us" id="aboutus">
 <div class="container">
 
-  <!-- SECTION HEADER -->
   <div class="section-header">
 
-    <!-- SECTION TITLE -->
     <h2 class="white-text">About US</h2>
 
-    <!-- SHORT DESCRIPTION ABOUT THE SECTION -->
     <h5 class="white-text">
         We design &amp; develop qaulity products to help small &amp; medium level business.
     </h5>
   </div>
-  <!-- / END SECTION HEADER -->
 
-  <!-- 3 COLUMNS OF ABOUT US-->
   <div class="row">
 
-    <!-- COLUMN 1 - BIG MESSAGE ABOUT THE COMPANY-->
     <div class="col-lg-4 col-md-4 column">
       <div class="big-intro">
          Developing Amazing Things with Passion since 2002.
       </div>
     </div>
 
-    <!-- COLUMN 2 - BRIEF ABOUT THE COMPANY-->
     <div class="col-lg-4 col-md-4 column">
       <p>
          Created forth two. Behold appear first, kind all i saying fowl man itself moved which every open shall moved subdue appear. Saying life wherein stars. Give dry, own, male had that us third lesser over deep. May every bring in it Whose. Female earth heaven won't behold female.<br/><br/>
@@ -65,11 +58,9 @@
       </p>
     </div>
 
-    <!-- COLUMN 1 - SKILSS-->
     <div class="col-lg-4 col-md-4 column">
       <ul class="skills">
 
-        <!-- SKILL ONE -->
         <li class="skill">
           <h6>Web Design</h6>
           <p>
@@ -77,7 +68,6 @@
           </p>
         </li>
 
-        <!-- SKILL TWO -->
         <li class="skill">
           <h6>development</h6>
           <p>
@@ -85,7 +75,6 @@
           </p>
         </li>
 
-        <!-- SKILL THREE -->
         <li class="skill">
           <h6>photography</h6>
           <p>
@@ -93,7 +82,6 @@
           </p>
         </li>
 
-        <!-- SKILL FOUR -->
         <li class="skill">
           <h6>production</h6>
           <p>
@@ -102,32 +90,26 @@
         </li>
 
       </ul>
-    </div> <!-- / END SKILLS COLUMN-->
-  </div> <!-- / END 3 COLUMNS OF ABOUT US-->
-</div> <!-- / END CONTAINER -->
+    </div>
+  </div>
+</div>
 
-</section> <!-- END ABOUT US SECTION -->
+</section>
 
 <section class="packages" id="pricingtable">
 <div class="container">
 
   <!-- SECTION HEADER -->
   <div class="section-header">
-
-    <!-- SECTION TITLE -->
     <h2 class="white-text">Packages</h2>
-
-    <!-- SHORT DESCRIPTION ABOUT THE SECTION -->
     <h6 class="white-text">
       We have 4 friendly packages for you. Check all the packages and choose the right one for you.
     </h6>
   </div>
-  <!-- / END SECTION HEADER -->
 
   <!-- PACKAGES -->
   <div class="row">
 
-    <!-- FIRST PACKAGE -->
     <div class="col-xs-6 col-md-4">
       <div class="package">
         <div class="package-header green-bg">
@@ -150,7 +132,7 @@
         <a href="#" class="btn btn-primary custom-button green-btn">
         Sign Up </a>
       </div>
-    </div> <!-- / END FIRST PACKAGE -->
+    </div>
 
     <div class="col-xs-6 col-md-4">
       <div class="package">
@@ -197,9 +179,9 @@
         </div>
       </div>
     </div>
-  </div> <!-- / END PACKAGES -->
+  </div>
 
-</div> <!--END CONTAINER  -->
-</section> <!-- END PACKAGES SECTION -->
+</div>
+</section>
 
 {% endblock %}
