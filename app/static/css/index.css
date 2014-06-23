@@ -1,0 +1,173 @@
+* ---- SECTION: HOME ---- */
+.home {
+  max-height: 600px;
+  padding-bottom: 100px;
+}
+
+.intro {
+  text-align: center;
+  color: #FFF;
+  margin-top: 10%;
+  line-height: 65px;
+  z-index: 0;
+}
+
+/* Short Messages */
+.bottom-message-section {
+  position: relative;
+}
+
+.short-text {
+  margin: auto;
+  text-align: center;
+  color: rgba(255,255,255,0.7);
+  text-transform: uppercase;
+}
+
+/* ---- SECTION: ABOUT US ---- */
+.about-us {
+  background: #272727;
+  color: #FFF;
+  padding-bottom: 100px;
+}
+
+.about-us .big-intro {
+  text-align: right;
+  font-weight: 300;
+  font-size: 60px;
+  line-height: normal;
+  margin-top: -15px;
+}
+
+.about-us li {
+  padding-bottom: 15px;
+}
+
+.about-us p {
+  text-align: left;
+  color: #939393;
+}
+
+.about-us h6 {
+  float: left;
+  margin-right: 15px;
+}
+
+.about-us .column {
+  margin-bottom: 78px;
+}
+
+/* ---- SECTION: PACKAGES ---- */
+.packages {
+  padding-bottom: 50px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.package {
+  border-radius: 4px;
+  background: #FFFFFF;
+  margin-top: 25px;
+  margin-bottom: 50px;
+  padding-bottom: 15px;
+}
+
+.package-header {
+  height: 57px;
+  color: #FFF;
+  line-height: 57px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.package-header h5 {
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-top: 5%;
+}
+
+.price {
+  line-height: 120px;
+  height: 100px;
+  color: #FFF;
+  font-weight: 400;
+}
+
+.price h4 {
+  display: inline;
+  font-size: 40px;
+  line-height: normal;
+  margin-bottom: 0;
+}
+
+.price h4 .dollar-sign {
+  font-size: 17px;
+  vertical-align: super;
+}
+
+.price .price-meta {
+  line-height: normal;
+  text-transform: uppercase;
+  color: #9f9f9f;
+}
+
+.package ul li {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 80%;
+  margin: auto;
+  border-bottom: 1px dotted #dadada;
+}
+
+.package ul li:last-child {
+  border-bottom: 0;
+}
+
+.best-value .package {
+  margin-top: 0;
+}
+
+.best-value .package-header {
+  padding-top: 17px;
+  height: 82px !important;
+}
+
+.best-value .package-header h4 {
+  font-weight: bold;
+  line-height: 29px;
+  text-transform: uppercase;
+}
+
+.best-value .package-header .meta-text {
+  font-size: 13px;
+  line-height: normal;
+}
+
+.best-value .package-header {
+  height: 72px;
+}
+
+.package ul li i {
+  font-size: 13px;
+  margin-right: 5px;
+}
+
+.order {
+  background: #d8ccba;
+  color: #404040;
+}
+
+.package .order-now {
+  line-height: 45px;
+  max-width: 100%;
+  display: block;
+  background: #404040;
+  color: #FFF;
+  -webkit-transition: all 700ms;
+          transition: all 700ms;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.package .order-now:hover {
+  background: #e96656;
+}

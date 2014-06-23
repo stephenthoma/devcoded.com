@@ -1,5 +1,10 @@
 {% extends "navbar_base.html" %}
 
+{% block styles %}
+<link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
+{{ super() }}
+{% endblock %}
+
 {% block content %}
 <img class="parallax-background" src="{{ url_for('static', filename='img/background.png') }}"></img>
 
