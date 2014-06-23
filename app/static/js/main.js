@@ -6,6 +6,7 @@ $(document).ready(function() {
   });
 
   // Sticky Header - http://jqueryfordesigners.com/fixed-floating-elements/
+  try {
   var top = $('#main-nav').offset().top - parseFloat($('#main-nav').css('margin-top').replace(/auto/, 0));
 
   $(window).scroll(function (event) {
@@ -21,6 +22,7 @@ $(document).ready(function() {
       $('#main-nav').removeClass('fixed');
     }
   });
+  } catch (e) { console.log(e) }
 });
 
 // Parallax
@@ -35,5 +37,14 @@ $(document).ready(function(){
         backgroundPosition: coords
       });
     });
+  });
+});
+
+// Form input focus
+$(document).ready(function(){
+  $(".form-control").focus(function () {
+    $(this).closest(".textbox-wrap").addClass("focused");
+  }).blur(function () {
+    $(this).closest(".textbox-wrap").removeClass("focused");
   });
 });
