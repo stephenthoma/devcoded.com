@@ -20,8 +20,13 @@
           <li><a href="#home">Home</a></li>
           <li><a href="#aboutus">About Us</a></li>
           <li><a href="#pricingtable">Pricing</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#order">Order</a></li>
+          {% if current_user.is_authenticated() %}
+          <li style="padding-left:40px"><a href={{ url_for('main.dashboard') }}>Dashboard</a></li>
+          {% else %}
+          <li style="padding-left:40px"><a href={{ url_for('auth.login') }}>Login</a></li>
+          {% endif %}
         </ul>
       </nav>
     </div>
