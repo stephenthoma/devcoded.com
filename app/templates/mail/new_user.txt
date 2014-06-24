@@ -1,0 +1,1 @@
+User {{ user.username }} has created an account.
