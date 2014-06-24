@@ -7,19 +7,19 @@ from ..models import User
 class LoginForm(Form):
     email = EmailField('Email', validators=[DataRequired(), Length(1, 64),
                                              Email()])
-    password = PasswordField('Password', validators=[DataRequired(), Length(8,64)])
+    password = PasswordField('Password', validators=[DataRequired(), Length(8,64, message='Password must be more than 8 characters long.')])
     remember_me = BooleanField('Keep me logged in')
     submit = SubmitField('Log In')
 
 class RegistrationForm(Form):
-    email = StringField('Email', validators=[DataRequired(), Length(1, 64),
+    email = EmailField('Email', validators=[DataRequired(), Length(1, 64),
                                            Email()])
     username = StringField('Username', validators=[
         DataRequired(), Length(1, 64), Regexp('^[A-Za-z][A-Za-z0-9_.]*$', 0,
                                           'Usernames must have only letters, '
                                           'numbers, dots or underscores')])
     password = PasswordField('Password', validators=[
-        DataRequired(), EqualTo('password2', message='Passwords must match.')])
+        DataRequired(), Length(8,64, message='Password must be more than 8 characters long.'), EqualTo('password2', message='Passwords must match.')])
     password2 = PasswordField('Confirm password', validators=[DataRequired()])
     submit = SubmitField('Register')
 
@@ -32,24 +32,24 @@ class RegistrationForm(Form):
             raise ValidationError('Username already in use.')
 
 class ChangePasswordForm(Form):
-    old_password = PasswordField('Old password', validators=[DataRequired()])
+    old_password = PasswordField('Old password', validators=[DataRequired(), Length(8,64)])
     password = PasswordField('New password', validators=[
         DataRequired(), EqualTo('password2', message='Passwords must match')])
-    password2 = PasswordField('Confirm new password', validators=[DataRequired()])
+    password2 = PasswordField('Confirm new password', validators=[DataRequired(), Length(8,64)])
     submit = SubmitField('Update Password')
 
 
 class PasswordResetRequestForm(Form):
-    email = StringField('Email', validators=[DataRequired(), Length(1, 64),
+    email = EmailField('Email', validators=[DataRequired(), Length(1, 64),
                                              Email()])
     submit = SubmitField('Reset Password')
 
 class PasswordResetForm(Form):
-    email = StringField('Email', validators=[DataRequired(), Length(1, 64),
+    email = EmailField('Email', validators=[DataRequired(), Length(1, 64),
                                              Email()])
     password = PasswordField('New Password', validators=[
-        DataRequired(), EqualTo('password2', message='Passwords must match')])
-    password2 = PasswordField('Confirm password', validators=[DataRequired()])
+        DataRequired(), Length(8,64), EqualTo('password2', message='Passwords must match')])
+    password2 = PasswordField('Confirm password', validators=[DataRequired(), Length(8,64)])
     submit = SubmitField('Reset Password')
 
     def validate_email(self, field):
@@ -58,7 +58,7 @@ class PasswordResetForm(Form):
 
 
 class ChangeEmailForm(Form):
-    email = StringField('New Email', validators=[DataRequired(), Length(1, 64),
+    email = EmailField('New Email', validators=[DataRequired(), Length(1, 64),
                                                  Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Update Email Address')
