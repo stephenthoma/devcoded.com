@@ -15,6 +15,7 @@
 /* Short Messages */
 .bottom-message-section {
   position: relative;
+  padding-bottom: 15px;
 }
 
 .short-text {

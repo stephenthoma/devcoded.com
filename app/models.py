@@ -13,6 +13,7 @@ class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(64), unique=True, index=True)
+    username = db.Column(db.String(64), unique=True)
     role = db.Column(db.Integer, default=Role.USER)
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
@@ -26,6 +27,7 @@ class User(UserMixin, db.Model):
         seed()
         for i in range(count):
             u = User(email=forgery_py.internet.email_address(),
+                    username=forgery_py.lorem_ipsum.word(),
                     password=forgery_py.lorem_ipsum.word(),
                     confirmed=True)
             db.session.add(u)

@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block body_attribs %} style="background-color: rgba(64,64,64,1);" {% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="register-form-section">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="animated bounceInLeft form-error-box" data-animation="bounceInLeft">
+        {% for message in messages %}
+          <span>{{ message }}</span>
+        {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% if form.errors %}
+      {% for error in form.errors %}
+        <div class="animated bounceInLeft form-error-box" data-animation="bounceInLeft">
+          <span>{{ form.errors[error][0] }}</span>
+        </div>
+      {% endfor %}
+    {% endif %}
+    <div class="form-content">
+      <form action="{{ url_for('auth.register') }}" method="POST">
+        <div class="section-title">
+          <h3 class="blue-text">Register</h3>
+        </div>
+        <div class="textbox-wrap">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-user"></i>
+            </span>
+            {{ form.username(class="form-control", required="required", placeholder="username") }}
+          </div>
+        </div>
+        <div class="textbox-wrap">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-envelope-o"></i>
+            </span>
+            {{ form.email(class="form-control", required="required", placeholder="email") }}
+          </div>
+        </div>
+        <div class="textbox-wrap">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-key"></i>
+            </span>
+            {{ form.password(class="form-control", required="required", placeholder="password") }}
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-key" style="color: #888;"></i>
+            </span>
+            {{ form.password2(class="form-control", required="required", placeholder="confirm password") }}
+          </div>
+        </div>
+        {{ form.csrf_token }}
+        <div class="form-action clearfix">
+          <button type="submit" class="btn btn-success pull-right custom-button green-btn">
+            Submit &nbsp;<i class="fa fa-chevron-circle-right"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="after-form-box">
+      <h4>Already have an account?</h4>
+      <a href="{{ url_for('auth.login') }}">Click here</a> <span>to login.</span>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+<script>
+  $(document).ready(function() {
+    var password1 = document.getElementById('password');
+    var password2 = document.getElementById('password2');
+
+    var checkPasswordValidity = function() {
+        if (password1.value != password2.value) {
+            password1.setCustomValidity('Passwords must match.');
+        } else {
+            password1.setCustomValidity('');
+        }
+    };
+
+    password1.addEventListener('change', checkPasswordValidity, false);
+    password2.addEventListener('change', checkPasswordValidity, false);
+  });
+</script>
+{% endblock %}
