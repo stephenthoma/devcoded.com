@@ -84,7 +84,7 @@ class User(UserMixin, db.Model):
         if data.get('reset') != self.id:
             return False
         self.password = new_password
-        db.session_add(self)
+        db.session.add(self)
         return True
 
     def generate_email_change_token(self, new_email, expiration=3600):
