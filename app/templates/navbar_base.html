@@ -12,20 +12,20 @@
           <span class="icon-bar"></span>
         </button>
         <a href="./" class="navbar-brand">
-          <img src="{{ url_for('static', filename='img/logo.png') }}" alt="MC Plugins">
+          <img src="{{ url_for('static', filename='img/logo.png') }}" alt="DEVcoded">
         </a>
       </div>
       <nav class="navbar-collapse bs-navbar-collapse collapse" role="navigation" style="height: 1px;">
         <ul class="nav navbar-nav navbar-right responsive-nav main-nav-list">
           <li><a href="#home">Home</a></li>
           <li><a href="#aboutus">About Us</a></li>
-          <li><a href="#pricingtable">Pricing</a></li>
           <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#features">Features</a></li>
           <li><a href="#order">Order</a></li>
           {% if current_user.is_authenticated() %}
-          <li style="padding-left:40px"><a href={{ url_for('main.dashboard') }}>Dashboard</a></li>
+          <li style="margin-left:40px"><a href={{ url_for('main.dashboard') }}>Dashboard</a></li>
           {% else %}
-          <li style="padding-left:40px"><a href={{ url_for('auth.login') }}>Login</a></li>
+          <li style="margin-left:40px"><a href={{ url_for('auth.login') }}>Login</a></li>
           {% endif %}
         </ul>
       </nav>
