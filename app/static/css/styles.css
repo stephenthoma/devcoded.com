@@ -30,7 +30,7 @@ body {
   width: device-width;
 }
 
-/* Other fixes*/
+/* Other fixes */
 *,*:before,*:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -279,6 +279,10 @@ h6 {
   line-height: 45px;
 }
 
+.navbar-brand img {
+  padding-top: 6px;
+}
+
 .current a {
   color: #e96656 !important;
   position: relative;
@@ -321,7 +325,7 @@ h6 {
   overflow: hidden;
 }
 
-.home, .about-us, .packages, .testimonial {
+.home, .about-us, .features, .testimonial {
   padding-top: 100px;
 }
 
@@ -440,6 +444,7 @@ h6 {
 .form-error-box span {
   display: flex;
   padding-left: 5px;
+  text-align: left;
 }
 
 
