@@ -17,11 +17,11 @@
       </div>
       <nav class="navbar-collapse bs-navbar-collapse collapse" role="navigation" style="height: 1px;">
         <ul class="nav navbar-nav navbar-right responsive-nav main-nav-list">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#aboutus">About Us</a></li>
-          <li><a href="#testimonials">Testimonials</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#order">Order</a></li>
+          <li><a href="{{ url_for('main.index') }}#home">Home</a></li>
+          <li><a href="{{ url_for('main.index') }}#aboutus">About Us</a></li>
+          <li><a href="{{ url_for('main.index') }}#testimonials">Testimonials</a></li>
+          <li><a href="{{ url_for('main.index') }}#features">Features</a></li>
+          <li><a href="{{ url_for('main.index') }}#order">Order</a></li>
           {% if current_user.is_authenticated() %}
           <li style="margin-left:40px"><a href={{ url_for('main.dashboard') }}>Dashboard</a></li>
           {% else %}
