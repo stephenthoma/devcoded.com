@@ -1,0 +1,12 @@
+{% extends "navbar_base.html" %}
+
+{% block styles %}
+    <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h3 class="blue-text">CHECK IT OUT AWESOME DASHBOARD PAGE</h3>
+</div>
+{% endblock %}

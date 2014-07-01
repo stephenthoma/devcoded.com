@@ -21,7 +21,7 @@
           <li><a href="{{ url_for('main.index') }}#aboutus">About Us</a></li>
           <li><a href="{{ url_for('main.index') }}#testimonials">Testimonials</a></li>
           <li><a href="{{ url_for('main.index') }}#features">Features</a></li>
-          <li><a href="{{ url_for('main.index') }}#order">Order</a></li>
+          <li><a href={{ url_for('main.order') }}>Order</a></li>
           {% if current_user.is_authenticated() %}
           <li style="margin-left:40px"><a href={{ url_for('main.dashboard') }}>Dashboard</a></li>
           {% else %}
