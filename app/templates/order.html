@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="order-form-section">
+    <div class="section-title">
+      <h3 class="blue-text">Order a Plugin</h3>
+      <h5>Be sure to include as much detail as possible.</h5>
+    </div>
+    <form action="#">
+      <div class="textbox-wrap">
+        <label for="plugin-name" class="control-label">Plugin name</label>
+        <div class="col-md-3">
+          <div class="input-group col-md-12">
+            <span class="input-group-addon">
+              <i class="fa fa-star"></i>
+            </span>
+            <input id="plugin-name" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="textbox-wrap">
+        <label for="plugin-description" class="control-label">Plugin description</label>
+        <div class="col-md-5">
+          <div class="input-group col-md-12">
+            <span class="input-group-addon">
+              <i class="fa fa-pencil"></i>
+            </span>
+            <textarea id="plugin-description" class="form-control" rows="5"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="hr"></div>
+      <div class="textbox-wrap">
+        <label>Commands</label>
+        <div class="command-group clearfix">
+          <div class="col-md-5">
+            <div class="input-group col-md-12">
+              <input class="form-control command-name" placeholder="/command [arg] [value]">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group col-md-12">
+              <input class="form-control command-permission" placeholder="permission.node">
+            </div>
+          </div>
+          <div class="col-md-offset-3 col-md-8">
+            <div class="input-group col-md-12">
+              <input class="form-control" placeholder="Command description">
+            </div>
+          </div>
+          <button style="color: #ccc;" class="fa fa-large fa-minus-circle icon-button"></button>
+        </div>
+        <div class="command-group clearfix">
+          <div class="col-md-offset-3 col-md-5">
+            <div class="input-group col-md-12">
+              <input class="form-control command-name" placeholder="/command [arg] [value]">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group col-md-12">
+              <input class="form-control command-permission" placeholder="permission.node">
+            </div>
+          </div>
+          <div class="col-md-offset-3 col-md-8">
+            <div class="input-group col-md-12">
+              <input class="form-control" placeholder="Command description">
+            </div>
+          </div>
+          <button class="fa fa-large fa-minus-circle icon-button rm-command"></button>
+        </div>
+
+        <div class="col-md-12">
+        <button id="mk-command" class="btn btn-success pull-right custom-button green-btn">
+          <i class="fa fa-plus"></i>
+        </button>
+        </div>
+      </div>
+      <div class="hr"></div>
+      <div class="textbox-wrap">
+        <label>Additional Permissions</label>
+        <div class="command-group clearfix">
+          <div class="col-md-3">
+            <div class="input-group col-md-12">
+              <input class="form-control" placeholder="permission.node">
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="input-group col-md-12">
+              <input class="form-control" placeholder="Permission description">
+            </div>
+          </div>
+          <button style="color: #ccc;" class="fa fa-large fa-minus-circle icon-button"></button>
+        </div>
+        <div class="col-md-12">
+        <button id="mk-perm" class="btn btn-success pull-right custom-button green-btn">
+          <i class="fa fa-plus"></i>
+        </button>
+        </div>
+      </div>
+      <div class="hr"></div>
+      <div class="textbox-wrap">
+        <label>Configuration</label>
+        <div class="command-group clearfix">
+          <div class="col-md-2">
+            <div class="input-group col-md-12">
+              <input class="form-control" placeholder="Name">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="input-group col-md-12">
+              <input class="form-control" placeholder="Value">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group col-md-12">
+              <input class="form-control" placeholder="Description">
+            </div>
+          </div>
+          <button style="color: #ccc;" class="fa fa-large fa-minus-circle icon-button"></button>
+        </div>
+      </div>
+      <div class="hr"></div>
+      <div class="textbox-wrap">
+        <label>Scenario Handling</label>
+        <div class="command-group clearfix">
+          <div class="col-md-3">
+            <span class="inline-text">If</span>
+            <div class="input-group col-md-11">
+              <input class-"form-control" placeholder="Event">
+            </div>
+          </div>
+          <div class="col-md-5">
+            <span class="inline-text">then</span>
+            <div class="input-group col-md-10">
+              <input class="form-control" placeholder="perform this action.">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+<script>
+$(document).ready(function(){
+  var command_string = '<div class="command-group clearfix"><div class="col-md-offset-3 col-md-5"><div class="input-group col-md-12"><input class="form-control command-name" placeholder="/command [arg] [value]"></div></div><div class="col-md-3"><div class="input-group col-md-12"><input class="form-control command-permission" placeholder="permission.node"></div></div><div class="col-md-offset-3 col-md-8"><div class="input-group col-md-12"><input class="form-control" placeholder="Command description"></div></div><button class="fa fa-large fa-minus-circle icon-button rm-command"></button></div>'
+  var perm_string = '<div class="command-group clearfix"><div class="col-md-offset-3 col-md-3"><div class="input-group col-md-12"><input class="form-control" placeholder="permission.node"></div></div><div class="col-md-5"><div class="input-group col-md-12"><input class="form-control" placeholder="Permission description"></div></div><button class="fa fa-large fa-minus-circle icon-button rm-command"></button></div>'
+
+  $(document).on("click", ".rm-command", function (e) {
+    e.preventDefault();
+    $(this).closest(".command-group").remove();
+  });
+
+  $(document).on("keyup", ".command-name", function () {
+    var clean_plugin_name = $("#plugin-name").val().split(" ")[0].toLowerCase().replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-');
+    var clean_command_name = $(this).val().split(" ")[0].toLowerCase().replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-');
+
+    var perm_ele = $(this).parents(':eq(1)').siblings(".col-md-3").children().children();
+    $(perm_ele).val(clean_plugin_name + '.' + clean_command_name)
+  });
+
+  $("#mk-command").on("click", function (e) {
+    e.preventDefault();
+    $(this).parent().siblings(".command-group").last().after(command_string);
+  });
+
+  $("#mk-perm").on("click", function (e) {
+    e.preventDefault();
+    $(this).parent().siblings(".command-group").last().after(perm_string);
+  });
+});
+
+</script>
+{% endblock %}

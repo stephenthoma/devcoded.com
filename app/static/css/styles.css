@@ -477,4 +477,91 @@ h6 {
   margin-top: 12%;
 }
 
+/* ---- FORM: ORDER ---- */
 
+.order-form-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.order-form-section .hr {
+  background: rgba(240, 240, 240, 1.0);
+  margin-bottom: 15px;
+  height: 1px;
+  clear: both;
+  border: none;
+}
+
+.order-form-section .custom-button {
+  margin-bottom: 15px;
+}
+
+.icon-button {
+  height: 30px;
+  font-size: large;
+  background: none;
+  border: none;
+  -moz-transition: color 0.5s;
+  -o-transition: color 0.5s;
+  -webkit-transition: color 0.5s;
+  transition: color 0.5s;
+}
+
+.icon-button:hover {
+  color: rgba(233, 102, 86, 1.0);
+}
+
+.icon-button:focus {
+  outline: none;
+}
+
+.order-form-section label{
+  width: 200px;
+  margin-right: 16px;
+  line-height: 35px;
+  margin-bottom: 0;
+  text-align: left;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: small;
+  color: rgba(200, 200, 200, 1.0);
+}
+
+.order-form-section input,label {
+  float: left;
+}
+
+.order-form-section .section-title {
+  padding-bottom: 45px;
+}
+
+.order-form-section .textbox-wrap {
+  border-left: none;
+  height: 50px;
+}
+
+.order-form-section .textbox-wrap.focused {
+  border-left: none;
+  background-color: #fff;
+  -o-box-shadow: none;
+  -ms-box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.order-form-section .inline-text {
+  float: left;
+  padding-right: 5px;
+  line-height: 33px;
+}
+
+.order-form-section .input-group {
+  margin-bottom: 10px;
+}
+
+.order-form-section .command-group {
+  margin-bottom: 15px;
+}
