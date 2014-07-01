@@ -11,8 +11,8 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    FLASKY_MAIL_SUBJECT_PREFIX = '[MC Plugins]'
-    FLASKY_MAIL_SENDER = 'Minecraft Plugins Admin <admin@mcplugins.com>'
+    FLASKY_MAIL_SUBJECT_PREFIX = '[DEVCoded_]'
+    FLASKY_MAIL_SENDER = 'Minecraft Plugins Admin <admin@devcoded.com>'
     FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
 
     @staticmethod
