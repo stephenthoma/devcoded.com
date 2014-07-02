@@ -11,10 +11,10 @@
                 </div>
                 <nav class="navbar-collapse bs-navbar-collapse collapse" role="navigation" style="height: 50px;">
                     <ul class="nav navbar-nav navbar-right responsive-nav main-nav-list">
-                        <li><a href="{{ url_for('main.dashboard') }}">Overview</a></li>
-                        <li><a href="{{ url_for('main.dashboard') }}/orders">Orders</a></li>
-                        <li><a href="{{ url_for('main.dashboard') }}/xyz">xyz</a></li>
-                        <li><a href="{{ url_for('main.dashboard') }}/history">History</a></li>
+                        <li><a href="{{ url_for('dashboard.dash') }}">Overview</a></li>
+                        <li><a href="{{ url_for('dashboard.dash') }}/orders">Orders</a></li>
+                        <li><a href="{{ url_for('dashboard.dash') }}/xyz">xyz</a></li>
+                        <li><a href="{{ url_for('dashboard.dash') }}/history">History</a></li>
                         <li><a href="{{ url_for('main.index') }}">Home</a></li>
                         <li style="margin-left:40px"><a href={{ url_for('auth.logout') }}>Logout</a></li>
 

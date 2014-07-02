@@ -14,21 +14,4 @@ def index():
 def order():
     return render_template("order.html")
 
-# Dashboard parts
 
-@main.route('/dashboard')
-@main.route('/dashboard/')
-@main.route('/dashboard/??ANYTHINGELSE??')
-@login_required
-def dashboard():
-    return render_template("dashboard/dashboard.html")
-
-@main.route('/dashboard/orders')
-@login_required
-def orders():
-    return render_template("dashboard/orders.html")
-
-@main.route('/dashboard/history')
-@login_required
-def history():
-    return render_template("dashboard/history.html")
