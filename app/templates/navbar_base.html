@@ -23,9 +23,10 @@
           <li><a href="{{ url_for('main.index') }}#features">Features</a></li>
           <li><a href={{ url_for('main.order') }}>Order</a></li>
           {% if current_user.is_authenticated() %}
-          <li style="margin-left:40px"><a href={{ url_for('main.dashboard') }}>Dashboard</a></li>
+              <li style="margin-left:40px"> <a href={{ url_for('main.dashboard') }}>Dashboard</a></li>
+              <li><a href={{ url_for('auth.logout') }}>Logout</a></li>
           {% else %}
-          <li style="margin-left:40px"><a href={{ url_for('auth.login') }}>Login</a></li>
+             <li style="margin-left:40px"><a href={{ url_for('auth.login') }}>Login</a></li>
           {% endif %}
         </ul>
       </nav>

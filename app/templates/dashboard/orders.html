@@ -1,4 +1,4 @@
-{% extends "navbar_base.html" %}
+{% extends "dashboard/navbar_dash.html" %}
 
 {% block styles %}
     <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
@@ -6,9 +6,5 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <section class="overview" id="overview">
-
-    </section>
-</div>
+    orders
 {% endblock %}
