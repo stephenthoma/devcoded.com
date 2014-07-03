@@ -144,15 +144,96 @@
   </div>
 </div>
 
+<script id="command-template" type="text/x-jquery-tmpl">
+<div class="command-group clearfix">
+  <div class="col-md-offset-3 col-md-5">
+    <div class="input-group col-md-12">
+      <input id="commands-command_name-${idx}" class="form-control command-name" placeholder="/command [arg] [value]">
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="input-group col-md-12">
+      <input id="commands-command_perm-${idx}" class="form-control command-permission" placeholder="permission.node">
+    </div>
+  </div>
+  <div class="col-md-offset-3 col-md-8">
+    <div class="input-group col-md-12">
+      <input id="commands-command_desc-${idx}" class="form-control" placeholder="Command description">
+    </div>
+  </div>
+  <button class="fa fa-large fa-minus-circle icon-button rm-item"></button>
+</div>
+</script>
+
+<script id="permission-template" type="text/x-jquery-tmpl">
+<div class="command-group clearfix">
+  <div class="col-md-offset-3 col-md-3">
+    <div class="input-group col-md-12">
+      <input id="permissions-permission_name-${idx}" class="form-control", placeholder="permission.node">
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="input-group col-md-12">
+      <input id="permissions-permission_desc-${idx}" class="form-control", placeholder="Permission description">
+    </div>
+  </div>
+  <button class="fa fa-large fa-minus-circle icon-button rm-item"></button>
+</div>
+</script>
+
+<script id="configuration-template" type="text/x-jquery-tmpl">
+<div class="command-group clearfix">
+  <div class="col-md-offset-3 col-md-2">
+    <div class="input-group col-md-12">
+      <input id="configs-config_name-${idx}" class="form-control" placeholder="Name">
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="input-group col-md-12">
+      <input id="configs-config_val-${idx}" class="form-control" placeholder="Value">
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="input-group col-md-12">
+      <input id="configs-config_desc-${idx}" class="form-control" placeholder="Description">
+    </div>
+  </div>
+  <button class="fa fa-large fa-minus-circle icon-button rm-item"></button>
+</div>
+</script>
+
+<script id="event-template" type="text/x-jquery-tmpl">
+<li style="margin-bottom: 0px;" class="command-group">
+  <div class="cbp_tmicon fa fa-circle"></div>
+  <div class="cbp_tmlabel">
+    <div class="input-group col-md-12">
+      <input id="events-action-${idx}" class="form-control input-lg" placeholder="Action (ie. command, event)">
+    </div>
+    <div class="hr"></div>
+    <div class="input-group col-md-12">
+      <input id="events-result-${idx}" class="form-control input-lg" placeholder="Result (ie. what the plugin does">
+    </div>
+  </div>
+</li>
+<li>
+</script>
+
 {% endblock %}
 
 {% block scripts %}
 {{ super() }}
+<script src="{{ url_for('static', filename='js/lib/jquery.tmpl.js') }}"></script>
 
 <script>
-$(document).ready(function(){
-  var command_string = '<div class="command-group clearfix"><div class="col-md-offset-3 col-md-5"><div class="input-group col-md-12"><input class="form-control command-name" placeholder="/command [arg] [value]"></div></div><div class="col-md-3"><div class="input-group col-md-12"><input class="form-control command-permission" placeholder="permission.node"></div></div><div class="col-md-offset-3 col-md-8"><div class="input-group col-md-12"><input class="form-control" placeholder="Command description"></div></div><button class="fa fa-large fa-minus-circle icon-button rm-command"></button></div>'
-  var perm_string = '<div class="command-group clearfix"><div class="col-md-offset-3 col-md-3"><div class="input-group col-md-12"><input class="form-control" placeholder="permission.node"></div></div><div class="col-md-5"><div class="input-group col-md-12"><input class="form-control" placeholder="Permission description"></div></div><button class="fa fa-large fa-minus-circle icon-button rm-command"></button></div>'
+function insertTemplateOnClick(button_id, template_id) {
+  count = 0;
+  $(button_id).on("click", function(e) {
+    e.preventDefault(); // Don't submit on click
+    count++;
+    rendered_template = $(template_id).tmpl({idx: count});
+    $(this).parent().siblings(".command-group").last().after( rendered_template );
+  });
+};
 
   $(document).on("click", ".rm-command", function (e) {
     e.preventDefault();
@@ -167,15 +248,9 @@ $(document).ready(function(){
     $(perm_ele).val(clean_plugin_name + '.' + clean_command_name)
   });
 
-  $("#mk-command").on("click", function (e) {
-    e.preventDefault();
-    $(this).parent().siblings(".command-group").last().after(command_string);
-  });
-
-  $("#mk-perm").on("click", function (e) {
-    e.preventDefault();
-    $(this).parent().siblings(".command-group").last().after(perm_string);
-  });
+  insertTemplateOnClick("#mk-command", "#command-template");
+  insertTemplateOnClick("#mk-perm", "#permission-template");
+  insertTemplateOnClick("#mk-config", "#configuration-template");
 });
 
 </script>
