@@ -10,8 +10,16 @@ from ..models import User
 def index():
     return render_template("index.html")
 
-@main.route('/order')
+@main.route('/order', methods=['GET', 'POST'])
 def order():
-    return render_template("order.html")
+    form = RequestPluginForm()
+    if request.method == 'POST':
+        raise
+
+    if form.validate_on_submit():
+        #[TODO]: Add plugin to database
+        #[TODO]: Notify admin plugin was submitted
+        return redirect(url_for('dashboard.dash'))
+    return render_template("order.html", form=form)
 
 

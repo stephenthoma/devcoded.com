@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% block styles %}
+{{ super() }}
+<link href="{{ url_for('static', filename='css/lib/timeline.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
 <div class="container">
   <div class="order-form-section">
@@ -7,15 +12,15 @@
       <h3 class="blue-text">Order a Plugin</h3>
       <h5>Be sure to include as much detail as possible.</h5>
     </div>
-    <form action="#">
-      <div class="textbox-wrap">
+    <form action="{{ url_for('main.order') }}" method="POST">
+      <div class="textbox-wrap"> <!-- SECTION: General -->
         <label for="plugin-name" class="control-label">Plugin name</label>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <div class="input-group col-md-12">
             <span class="input-group-addon">
               <i class="fa fa-star"></i>
             </span>
-            <input id="plugin-name" class="form-control">
+            {{ form.plugin_name(id="plugin-name", class="form-control", required="required") }}
           </div>
         </div>
       </div>
@@ -23,71 +28,54 @@
         <label for="plugin-description" class="control-label">Plugin description</label>
         <div class="col-md-5">
           <div class="input-group col-md-12">
-            <span class="input-group-addon">
-              <i class="fa fa-pencil"></i>
-            </span>
-            <textarea id="plugin-description" class="form-control" rows="5"></textarea>
+            {{ form.plugin_desc(id="plugin-description", class="form-control", rows="5") }}
           </div>
         </div>
-      </div>
+      </div> <!-- END SECTION: General -->
+
       <div class="hr"></div>
-      <div class="textbox-wrap">
+
+      <div class="textbox-wrap"> <!-- SECTION: Commands -->
         <label>Commands</label>
         <div class="command-group clearfix">
           <div class="col-md-5">
             <div class="input-group col-md-12">
-              <input class="form-control command-name" placeholder="/command [arg] [value]">
+              {{ form.commands.command_name(class="form-control command-name", placeholder="/command [arg] [value]") }}
             </div>
           </div>
           <div class="col-md-3">
             <div class="input-group col-md-12">
-              <input class="form-control command-permission" placeholder="permission.node">
+              {{ form.commands.command_perm(class="form-control command-permission", placeholder="permission.node") }}
             </div>
           </div>
           <div class="col-md-offset-3 col-md-8">
             <div class="input-group col-md-12">
-              <input class="form-control" placeholder="Command description">
+              {{ form.commands.command_desc(class="form-control", placeholder="Command description") }}
             </div>
           </div>
           <button style="color: #ccc;" class="fa fa-large fa-minus-circle icon-button"></button>
         </div>
-        <div class="command-group clearfix">
-          <div class="col-md-offset-3 col-md-5">
-            <div class="input-group col-md-12">
-              <input class="form-control command-name" placeholder="/command [arg] [value]">
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="input-group col-md-12">
-              <input class="form-control command-permission" placeholder="permission.node">
-            </div>
-          </div>
-          <div class="col-md-offset-3 col-md-8">
-            <div class="input-group col-md-12">
-              <input class="form-control" placeholder="Command description">
-            </div>
-          </div>
-          <button class="fa fa-large fa-minus-circle icon-button rm-command"></button>
-        </div>
 
         <div class="col-md-12">
-        <button id="mk-command" class="btn btn-success pull-right custom-button green-btn">
-          <i class="fa fa-plus"></i>
-        </button>
+          <button id="mk-command" class="btn btn-success pull-right custom-button green-btn">
+            <i class="fa fa-plus"></i>
+          </button>
         </div>
-      </div>
+      </div> <!-- END SECTION: Commands -->
+
       <div class="hr"></div>
-      <div class="textbox-wrap">
+
+      <div class="textbox-wrap"> <!-- SECTION: Permissions -->
         <label>Additional Permissions</label>
         <div class="command-group clearfix">
           <div class="col-md-3">
             <div class="input-group col-md-12">
-              <input class="form-control" placeholder="permission.node">
+              {{ form.permissions.permission_name(class="form-control", placeholder="permission.node") }}
             </div>
           </div>
           <div class="col-md-5">
             <div class="input-group col-md-12">
-              <input class="form-control" placeholder="Permission description">
+              {{ form.permissions.permission_desc(class="form-control", placeholder="Permission description") }}
             </div>
           </div>
           <button style="color: #ccc;" class="fa fa-large fa-minus-circle icon-button"></button>
@@ -97,46 +85,60 @@
           <i class="fa fa-plus"></i>
         </button>
         </div>
-      </div>
+      </div> <!-- END SECTION: Permissions -->
+
       <div class="hr"></div>
-      <div class="textbox-wrap">
+
+      <div class="textbox-wrap"> <!-- SECTION: Configuration -->
         <label>Configuration</label>
         <div class="command-group clearfix">
           <div class="col-md-2">
             <div class="input-group col-md-12">
-              <input class="form-control" placeholder="Name">
+              {{ form.configs.config_name(class="form-control", placeholder="Name") }}
             </div>
           </div>
           <div class="col-md-2">
             <div class="input-group col-md-12">
-              <input class="form-control" placeholder="Value">
+              {{ form.configs.config_val(class="form-control", placeholder="Value") }}
             </div>
           </div>
           <div class="col-md-4">
             <div class="input-group col-md-12">
-              <input class="form-control" placeholder="Description">
+              {{ form.configs.config_desc(class="form-control", placeholder="Description") }}
             </div>
           </div>
           <button style="color: #ccc;" class="fa fa-large fa-minus-circle icon-button"></button>
         </div>
-      </div>
+      </div> <!-- END SECTION: Configuration -->
+
       <div class="hr"></div>
-      <div class="textbox-wrap">
-        <label>Scenario Handling</label>
+
+      <div class="textbox-wrap"> <!-- SECTION: Events -->
+        <label>Event Timeline</label>
         <div class="command-group clearfix">
-          <div class="col-md-3">
-            <span class="inline-text">If</span>
-            <div class="input-group col-md-11">
-              <input class-"form-control" placeholder="Event">
-            </div>
-          </div>
-          <div class="col-md-5">
-            <span class="inline-text">then</span>
-            <div class="input-group col-md-10">
-              <input class="form-control" placeholder="perform this action.">
-            </div>
-          </div>
+          <ul style="margin-left:14%;" class="cbp_tmtimeline">
+            <li>
+              <div class="cbp_tmicon fa fa-circle"></div>
+              <div class="cbp_tmlabel">
+                <div class="input-group col-md-12">
+                  {{ form.events.action(class="form-control input-lg", placeholder="Action (ie. command, event)") }}
+                </div>
+                <div class="hr"></div>
+                <div class="input-group col-md-12">
+                  {{ form.events.result(class="form-control", placeholder="Result (ie. what the plugin does)") }}
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="cbp_tmicon fa fa-plus"></div>
+            </li>
+          </ul>
         </div>
+      </div> <!-- END SECTION: Events -->
+
+      {{ form.csrf_token }}
+      <div class="clearfix">
+        <button type="submit" class="btn btn-success pull-right custom-button green-btn">
       </div>
     </form>
   </div>
