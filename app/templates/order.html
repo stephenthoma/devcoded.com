@@ -13,7 +13,7 @@
       <h5>Be sure to include as much detail as possible.</h5>
     </div>
     <form action="{{ url_for('main.order') }}" method="POST">
-      <div class="textbox-wrap"> <!-- SECTION: General -->
+      <div class="textbox-wrap clearfix"> <!-- SECTION: General -->
         <label for="plugin-name" class="control-label">Plugin name</label>
         <div class="col-md-4">
           <div class="input-group col-md-12">
@@ -81,9 +81,9 @@
           <button style="color: #ccc;" class="fa fa-large fa-minus-circle icon-button"></button>
         </div>
         <div class="col-md-12">
-        <button id="mk-perm" class="btn btn-success pull-right custom-button green-btn">
-          <i class="fa fa-plus"></i>
-        </button>
+          <button id="mk-perm" class="btn btn-success pull-right custom-button green-btn">
+            <i class="fa fa-plus"></i>
+          </button>
         </div>
       </div> <!-- END SECTION: Permissions -->
 
@@ -109,15 +109,20 @@
           </div>
           <button style="color: #ccc;" class="fa fa-large fa-minus-circle icon-button"></button>
         </div>
+        <div class="col-md-12">
+          <button id="mk-config" class="btn btn-success pull-right custom-button green-btn">
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
       </div> <!-- END SECTION: Configuration -->
 
       <div class="hr"></div>
 
-      <div class="textbox-wrap"> <!-- SECTION: Events -->
+      <div class="textbox-wrap clearfix"> <!-- SECTION: Events -->
         <label>Event Timeline</label>
         <div class="command-group clearfix">
           <ul style="margin-left:14%;" class="cbp_tmtimeline">
-            <li>
+            <li style="margin-bottom: 0px;" class="command-group">
               <div class="cbp_tmicon fa fa-circle"></div>
               <div class="cbp_tmlabel">
                 <div class="input-group col-md-12">
@@ -130,15 +135,17 @@
               </div>
             </li>
             <li>
-              <div class="cbp_tmicon fa fa-plus"></div>
+              <div style="background:#5cb85c;" class="cbp_tmicon">
+                <button class="fa fa-plus"></button>
+              </div>
             </li>
           </ul>
         </div>
       </div> <!-- END SECTION: Events -->
 
       {{ form.csrf_token }}
-      <div class="clearfix">
-        <button type="submit" class="btn btn-success pull-right custom-button green-btn">
+      <div class="col-md-12 clearfix">
+        <button type="submit" class="btn btn-success pull-right custom-button green-btn">Submit</button>
       </div>
     </form>
   </div>
@@ -235,7 +242,8 @@ function insertTemplateOnClick(button_id, template_id) {
   });
 };
 
-  $(document).on("click", ".rm-command", function (e) {
+$(document).ready(function(){
+  $(document).on("click", ".rm-item", function (e) {
     e.preventDefault();
     $(this).closest(".command-group").remove();
   });

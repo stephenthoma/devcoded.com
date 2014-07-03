@@ -501,6 +501,8 @@ h6 {
 
 .icon-button {
   height: 30px;
+  padding-top: 9px;
+  padding-left: 13px;
   font-size: large;
   background: none;
   border: none;
@@ -540,7 +542,6 @@ h6 {
 
 .order-form-section .textbox-wrap {
   border-left: none;
-  height: 50px;
 }
 
 .order-form-section .textbox-wrap.focused {
@@ -564,5 +565,5 @@ h6 {
 }
 
 .order-form-section .command-group {
-  margin-bottom: 15px;
+  margin-bottom: 7px;
 }
