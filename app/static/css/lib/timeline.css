@@ -74,6 +74,31 @@
 	margin: 0 0 -15px 73%;
 }
 
+.cbp_tmtimeline > li .cbp_add_tmlabel {
+  background: #5cb85c;
+  margin-bottom: 35px;
+}
+.cbp_tmtimeline > li .cbp_add_tmlabel:hover {
+  background: #47a447;
+}
+
+.cbp_tmtimeline > li .cbp_tmicon button {
+  background: none;
+  border: none;
+}
+.cbp_tmtimeline > li .cbp_tmicon button:focus {
+  outline: none;
+}
+
+.cbp_tmtimeline > li .rm-event-buttons:hover .fa-circle:before {
+  content: "\f068";
+  color: rgba(233, 102, 86, 1.0);
+  -moz-transition: color 0.5s;
+  -o-transition: color 0.5s;
+  -webkit-transition: color 0.5s;
+  transition: color 0.5s;
+}
+
 /* Example Media Queries */
 @media screen and (max-width: 65.375em) {
 
