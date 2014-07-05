@@ -234,18 +234,19 @@
 <script src="{{ url_for('static', filename='js/lib/jquery.tmpl.js') }}"></script>
 
 <script>
-function insertTemplateOnClick(button_id, template_id) {
-  count = 0;
+function insertTemplateOnClick(button_id, template_id, dist) {
   $(button_id).on("click", function(e) {
     e.preventDefault(); // Don't submit on click
-    count++;
+    var count = 1 + parseInt($(this).parents().eq(dist).siblings(".command-group").last().find("input").first().attr("id").replace(/[^\d.]/g, ""));
+    if(isNaN(count)) { count = 1; };
     rendered_template = $(template_id).tmpl({idx: count});
-    $(this).parent().siblings(".command-group").last().after( rendered_template );
+    $(this).parents().eq(dist).siblings(".command-group").last().after( rendered_template );
   });
 };
 
 $(document).ready(function(){
   $(document).on("click", ".rm-item", function (e) {
+    //[TODO]: Decrement idx of subsequent items
     e.preventDefault();
     $(this).closest(".command-group").remove();
   });
@@ -258,9 +259,10 @@ $(document).ready(function(){
     $(perm_ele).val(clean_plugin_name + '.' + clean_command_name)
   });
 
-  insertTemplateOnClick("#mk-command", "#command-template");
-  insertTemplateOnClick("#mk-perm", "#permission-template");
-  insertTemplateOnClick("#mk-config", "#configuration-template");
+  insertTemplateOnClick("#mk-command", "#command-template", 0);
+  insertTemplateOnClick("#mk-perm", "#permission-template", 0);
+  insertTemplateOnClick("#mk-config", "#configuration-template", 0);
+  insertTemplateOnClick("#mk-event", "#event-template", 1);
 });
 
 </script>
