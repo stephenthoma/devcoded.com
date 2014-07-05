@@ -53,7 +53,7 @@
               {{ form.commands.command_desc(class="form-control", placeholder="Command description") }}
             </div>
           </div>
-          <button style="color: #ccc;" class="fa fa-large fa-minus-circle icon-button"></button>
+          <button disabled style="color: #ccc;" class="fa fa-large fa-minus-circle icon-button"></button>
         </div>
 
         <div class="col-md-12">
@@ -78,7 +78,7 @@
               {{ form.permissions.permission_desc(class="form-control", placeholder="Permission description") }}
             </div>
           </div>
-          <button style="color: #ccc;" class="fa fa-large fa-minus-circle icon-button"></button>
+          <button disabled style="color: #ccc;" class="fa fa-large fa-minus-circle icon-button"></button>
         </div>
         <div class="col-md-12">
           <button id="mk-perm" class="btn btn-success pull-right custom-button green-btn">
@@ -107,7 +107,7 @@
               {{ form.configs.config_desc(class="form-control", placeholder="Description") }}
             </div>
           </div>
-          <button style="color: #ccc;" class="fa fa-large fa-minus-circle icon-button"></button>
+          <button disabled style="color: #ccc;" class="fa fa-large fa-minus-circle icon-button"></button>
         </div>
         <div class="col-md-12">
           <button id="mk-config" class="btn btn-success pull-right custom-button green-btn">
@@ -155,17 +155,17 @@
 <div class="command-group clearfix">
   <div class="col-md-offset-3 col-md-5">
     <div class="input-group col-md-12">
-      <input id="commands-command_name-${idx}" class="form-control command-name" placeholder="/command [arg] [value]">
+      <input required="required" id="commands-command_name-${idx}" class="form-control command-name" placeholder="/command [arg] [value]">
     </div>
   </div>
   <div class="col-md-3">
     <div class="input-group col-md-12">
-      <input id="commands-command_perm-${idx}" class="form-control command-permission" placeholder="permission.node">
+      <input required="required" id="commands-command_perm-${idx}" class="form-control command-permission" placeholder="permission.node">
     </div>
   </div>
   <div class="col-md-offset-3 col-md-8">
     <div class="input-group col-md-12">
-      <input id="commands-command_desc-${idx}" class="form-control" placeholder="Command description">
+      <input required="required" id="commands-command_desc-${idx}" class="form-control" placeholder="Command description">
     </div>
   </div>
   <button class="fa fa-large fa-minus-circle icon-button rm-item"></button>
@@ -176,12 +176,12 @@
 <div class="command-group clearfix">
   <div class="col-md-offset-3 col-md-3">
     <div class="input-group col-md-12">
-      <input id="permissions-permission_name-${idx}" class="form-control", placeholder="permission.node">
+      <input id="permissions-permission_name-${idx}" name="permissions-permission_name-${idx}" class="form-control", placeholder="permission.node">
     </div>
   </div>
   <div class="col-md-5">
     <div class="input-group col-md-12">
-      <input id="permissions-permission_desc-${idx}" class="form-control", placeholder="Permission description">
+      <input id="permissions-permission_desc-${idx}" name="permissions-permission_desc-${idx}" class="form-control", placeholder="Permission description">
     </div>
   </div>
   <button class="fa fa-large fa-minus-circle icon-button rm-item"></button>
@@ -192,17 +192,17 @@
 <div class="command-group clearfix">
   <div class="col-md-offset-3 col-md-2">
     <div class="input-group col-md-12">
-      <input id="configs-config_name-${idx}" class="form-control" placeholder="Name">
+      <input required="required" id="configs-config_name-${idx}" class="form-control" placeholder="Name">
     </div>
   </div>
   <div class="col-md-2">
     <div class="input-group col-md-12">
-      <input id="configs-config_val-${idx}" class="form-control" placeholder="Value">
+      <input required="required" id="configs-config_val-${idx}" class="form-control" placeholder="Value">
     </div>
   </div>
   <div class="col-md-4">
     <div class="input-group col-md-12">
-      <input id="configs-config_desc-${idx}" class="form-control" placeholder="Description">
+      <input required="required" id="configs-config_desc-${idx}" class="form-control" placeholder="Description">
     </div>
   </div>
   <button class="fa fa-large fa-minus-circle icon-button rm-item"></button>
@@ -211,14 +211,16 @@
 
 <script id="event-template" type="text/x-jquery-tmpl">
 <li style="margin-bottom: 0px;" class="command-group">
-  <div class="cbp_tmicon fa fa-circle"></div>
+  <div class="cbp_tmicon rm-event-buttons">
+    <button class="fa fa-circle rm-item"></button>
+  </div>
   <div class="cbp_tmlabel">
     <div class="input-group col-md-12">
-      <input id="events-action-${idx}" class="form-control input-lg" placeholder="Action (ie. command, event)">
+      <input required="required" id="events-action-${idx}" class="form-control input-lg" placeholder="Action (ie. command, event)">
     </div>
     <div class="hr"></div>
     <div class="input-group col-md-12">
-      <input id="events-result-${idx}" class="form-control input-lg" placeholder="Result (ie. what the plugin does">
+      <input required="required" id="events-result-${idx}" class="form-control input-lg" placeholder="Result (ie. what the plugin does">
     </div>
   </div>
 </li>
