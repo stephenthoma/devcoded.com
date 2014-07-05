@@ -120,27 +120,27 @@
 
       <div class="textbox-wrap clearfix"> <!-- SECTION: Events -->
         <label>Event Timeline</label>
-        <div class="command-group clearfix">
-          <ul style="margin-left:14%;" class="cbp_tmtimeline">
-            <li style="margin-bottom: 0px;" class="command-group">
-              <div class="cbp_tmicon fa fa-circle"></div>
-              <div class="cbp_tmlabel">
-                <div class="input-group col-md-12">
-                  {{ form.events.action(class="form-control input-lg", placeholder="Action (ie. command, event)") }}
-                </div>
-                <div class="hr"></div>
-                <div class="input-group col-md-12">
-                  {{ form.events.result(class="form-control", placeholder="Result (ie. what the plugin does)") }}
-                </div>
+        <ul style="margin-left:14%;" class="cbp_tmtimeline">
+          <li style="margin-bottom: 0px;" class="command-group">
+            <div class="cbp_tmicon">
+              <button disabled class="fa fa-circle"></button>
+            </div>
+            <div class="cbp_tmlabel">
+              <div class="input-group col-md-12">
+                {{ form.events.action(class="form-control input-lg", placeholder="Action (ie. command, event)") }}
               </div>
-            </li>
-            <li>
-              <div style="background:#5cb85c;" class="cbp_tmicon">
-                <button class="fa fa-plus"></button>
+              <div class="hr"></div>
+              <div class="input-group col-md-12">
+                {{ form.events.result(class="form-control", placeholder="Result (ie. what the plugin does)") }}
               </div>
-            </li>
-          </ul>
-        </div>
+            </div>
+          </li>
+          <li>
+            <div class="cbp_tmicon cbp_add_tmlabel">
+              <button id="mk-event" class="fa fa-plus"></button>
+            </div>
+          </li>
+        </ul>
       </div> <!-- END SECTION: Events -->
 
       {{ form.csrf_token }}
