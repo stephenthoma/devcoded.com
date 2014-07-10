@@ -43,7 +43,7 @@ def test(coverage=False):
         COV.stop()
         COV.save()
         print('Coverage Summary:')
-        Cov.report()
+        COV.report()
         basedir = os.path.abspath(os.path.dirname(__file__))
         covdir = os.path.join(basedir, 'tmp/coverage')
         COV.html_report(directory=covdir)
