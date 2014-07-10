@@ -30,7 +30,7 @@ manager.add_command("shell", Shell(make_context=make_shell_context))
 manager.add_command('db', MigrateCommand)
 
 @manager.command
-def test():
+def test(coverage=False):
     """Run all unit tests."""
     if coverage and not os.environ.get('FLASK_COVERAGE'):
         import sys
