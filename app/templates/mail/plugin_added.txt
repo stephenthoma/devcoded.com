@@ -1,0 +1,7 @@
+Your plugin is on its way!
+Congratulations on designing your plugin, {{ user.usernmae }}.
+
+{{ plugin.name }} has been added to our system and the developers have been notified! We'll email you as soon as a developer has been assigned to your project.
+
+Interested in the status of your plugin? Head on over to your dashboard for details.
+{{ url_for('dashboard.dash', _external=True) }}

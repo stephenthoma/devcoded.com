@@ -1,13 +1,10 @@
-Dear {{ user.username }},
+Welcome to DevCoded!
+Your account has been created, {{ user.username }}.
 
-Welcome to Flasky!
-
-To confirm your account please click on the following link:
-
+To start using our service please confirm your email by going to the following link!
 {{ url_for('auth.confirm', token=token, _external=True) }}
 
 Sincerely,
 
-MCPluginTeam
+The DevCoded Staff
 
-Note: replies to this email address are not monitored.

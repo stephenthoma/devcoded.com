@@ -465,12 +465,13 @@
                                     <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer">
                                       <tbody><tr>
                                         <td valign="top" class="mcnTextContent" style="padding-top:9px; padding-right: 18px; padding-bottom: 9px; padding-left: 18px;">
-                                          <h1>Welcome to DevCoded!</h1>
-                                          <h3>Your account has been created, {{ user.username }}.</h3>
+                                          <h1>Your plugin is on its way!</h1>
+                                          <h3>Congratulations on designing your plugin, {{ user.username }}.</h3>
 
-                                          <p>To start using our service please confirm your email by <a href="{{ url_for('auth.confirm', token=token, _external=True) }}">clicking here</a>.</p>
-
-                                          <p>Already confirmed? <a class="mc-template-link" href="{{ url_for('dashboard.dash', _external=True) }}">Head on over to your dashboard instead.</a></p>
+                                          <p>
+                                          {{ plugin.name }} has been added to our system and the developers have been notified! We'll email you as soon as a developer has been assigned to your project!
+                                          </p>
+                                          <p>Interested in the status of your plugin? <a class="mc-template-link" href="{{ url_for('dashboard.dash', _external=True) }}">Head on over to your dashboard for details.</a></p>
 
                                         </td>
                                       </tr>
@@ -525,4 +526,5 @@
       </table>
     </center>
   </body>
+
 </html>
