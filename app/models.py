@@ -39,7 +39,7 @@ class User(UserMixin, db.Model):
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
         if self.role is None:
-            if self.email == current_app.config['FLASKY_ADMIN']:
+            if self.email == current_app.config['DEVCODED_ADMIN']:
                 self.role = Role.ADMIN
             if self.role is None:
                 self.role = Role.USER
@@ -111,3 +111,45 @@ class User(UserMixin, db.Model):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+class Plugin(db.Model):
+    __tablename__ = 'plugins'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    name = db.Column(db.String(64))
+    description = db.Column(db.Text)
+    commands = db.relationship('PluginCommand')
+    permissions = db.relationship('PluginPermission')
+    configs = db.relationship('PluginConfig')
+    events = db.relationship('PluginEvent')
+
+class PluginConfig(db.Model):
+    __tablename__ = 'plugin_configs'
+    id = db.Column(db.Integer, primary_key=True)
+    plugin_id = db.Column(db.Integer, db.ForeignKey('plugins.id'))
+    name = db.Column(db.String(64))
+    value = db.Column(db.String(64))
+    description = db.Column(db.Text())
+
+class PluginPermission(db.Model):
+    __tablename__ = 'plugin_perms'
+    id = db.Column(db.Integer, primary_key=True)
+    plugin_id = db.Column(db.Integer, db.ForeignKey('plugins.id'))
+    node = db.Column(db.String(64))
+    description = db.Column(db.Text())
+
+class PluginCommand(db.Model):
+    __tablename__ = 'plugin_commands'
+    id = db.Column(db.Integer, primary_key=True)
+    plugin_id = db.Column(db.Integer, db.ForeignKey('plugins.id'))
+    command = db.Column(db.String(64))
+    node = db.Column(db.String(64))
+    description = db.Column(db.Text())
+
+class PluginEvent(db.Model):
+    __tablename__ = 'plugin_events'
+    id = db.Column(db.Integer, primary_key=True)
+    plugin_id = db.Column(db.Integer, db.ForeignKey('plugins.id'))
+    action = db.Column(db.Text())
+    result = db.Column(db.Text())
+
