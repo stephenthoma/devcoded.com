@@ -13,7 +13,7 @@
     <h1 class="intro">Quality products designed to enhance your server</h1>
 
     <div class="buttons">
-      <a href="#order" class="btn btn-primary custom-button green-btn">Order now</a>
+      <a href="{{ url_for('main.order') }}" class="btn btn-primary custom-button green-btn">Order now</a>
     </div>
     <div class="row bottom-message-section">
       <div class="col-lg-4 col-sm-4">
@@ -87,13 +87,6 @@
           </p>
         </li>
 
-        <li class="skill">
-          <h6>last thing</h6>
-          <p>
-            Info about another thing comes here.
-          </p>
-        </li>
-
       </ul>
     </div>
   </div>
@@ -108,7 +101,7 @@
     <h2 class="white-text">Testimonials</h2>
 
     <h6 class="white-text">
-      We have worked with hundreds of clients. Check what our awesome happy clients saying about us.
+      We have many satisfied clients! Check what they're saying about us below.
     </h6>
   </div>
 
@@ -132,7 +125,7 @@
               </div>
             </div>
             <div class="client-image">
-              <img src="{{ url_for('static', filename='img/headshot.png') }}" alt="">
+              <img src="{{ url_for('static', filename='img/headshot1.png') }}" alt="">
             </div>
           </div>
         </div>
@@ -153,7 +146,7 @@
               </div>
             </div>
             <div class="client-image">
-              <img src="{{ url_for('static', filename='img/headshot.png') }}" alt="">
+              <img src="{{ url_for('static', filename='img/headshot2.png') }}" alt="">
             </div>
           </div>
         </div>
@@ -175,7 +168,7 @@
               </div>
             </div>
             <div class="client-image">
-              <img src="{{ url_for('static', filename='img/headshot.png') }}" alt="">
+              <img src="{{ url_for('static', filename='img/headshot3.png') }}" alt="">
             </div>
           </div>
         </div>
@@ -204,7 +197,7 @@
         <div class="feature-icon">
           <i class="fa fa-large fa-heart"></i>
         </div>
-        <h5>Design with Love</h5>
+        <h5>Designed with Love</h5>
         <p>
             We’re passionate about creating the best plugins on the market.
             Everything that comes out of our business is held to the highest standards
@@ -225,7 +218,7 @@
         </div>
         <h5>Thousands of Options</h5>
         <p>
-           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+          Our pre-built plugin packages will get you up and running in no time at all. Choose from a set of options for a custom-tailored experience at a fraction of the price.
         </p>
       </div>
     </div>
@@ -236,7 +229,7 @@
         </div>
         <h5>Easy to Customize</h5>
         <p>
-           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+          Our plugins are designed with server administrators in mind. Configurations are all well documented and flexible to the greatest extent.
         </p>
       </div>
       <div class="feature">
@@ -261,4 +254,31 @@
   </div>
 </div>
 </section>
+
+<section class="order" id="order">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h3 class="white-text">Ready to order a plugin?</h3>
+      </div>
+      <div class="col-md-3">
+        <a href="{{ url_for('main.order') }}" class="btn btn-lg custom-button blue-btn">Order now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <span class="pull-left">© 2014 DEVCoded</span>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-6">
+        <span>Need to get in touch? Contact us at <a href="mailto:contact@devcoded.com">contact@devcoded.com</a></span>
+      </div>
+    </div>
+  </div>
+</footer>
 {% endblock %}

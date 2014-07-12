@@ -155,3 +155,33 @@
 .features .feature p {
   font-size: 14px;
 }
+
+/* ---- SECTION: ORDER ---- */
+.order {
+  background: #e96656;
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+.order h3 {
+  text-align: left;
+  line-height: 40px;
+  margin-top: 14px;
+}
+.order a {
+  margin-top: 12px;
+  float: right;
+}
+.order .red-btn:hover {
+  background: #bf3928;
+}
+
+/* ---- SECTION: FOOTER ---- */
+footer {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background: #272727;
+}
+
+footer span {
+  color: #ccc;
+}
