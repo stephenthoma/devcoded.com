@@ -12,6 +12,7 @@ from ..models import User, Plugin, PluginConfig, PluginPermission, \
 def index():
     return render_template("index.html")
 
+@login_required
 @main.route('/order', methods=['GET', 'POST'])
 def order():
     form = RequestPluginForm()
