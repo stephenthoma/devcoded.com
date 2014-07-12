@@ -28,8 +28,8 @@ class EventForm(insecureForm):
 class RequestPluginForm(Form):
     plugin_name = StringField('Plugin name', validators=[DataRequired(), Length(1, 64)])
     plugin_desc = TextAreaField('Plugin description', validators=[DataRequired(), Length(1, 256)])
-    commands    = FieldList(FieldList(FormField(CommandForm), min_entries=1)
-    permissions = FieldList(FormField(PermissionsForm), min_entries=1)
-    configs     = FieldList(FormField(ConfigurationForm), min_entries=1)
-    events      = FieldList(FormField(EventForm), min_entries=1)
+    commands    = FieldList(FormField(CommandForm))
+    permissions = FieldList(FormField(PermissionsForm))
+    configs     = FieldList(FormField(ConfigurationForm))
+    events      = FieldList(FormField(EventForm))
 
