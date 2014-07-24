@@ -3,19 +3,15 @@ from flask import render_template, redirect, url_for, abort, flash, request, \
 from flask.ext.login import login_required, current_user
 from . import dashboard
 from .. import db
-from ..models import User
+from ..models import User, Role
 
 @dashboard.route('/')
 @login_required
 def dash():
-    return render_template("dashboard/dashboard.html")
-
-@dashboard.route('/orders')
-@login_required
-def orders():
-    return render_template("dashboard/orders.html")
-
-@dashboard.route('/history')
-@login_required
-def history():
-    return render_template("dashboard/history.html")
+    user_role = current_user.role
+    if user_role  == Role.USER:
+        return render_template("dashboard/dashboard_user.html")
+    elif user_role == Role.DEV:
+        return render_template("dashboard/dashboard_developer.html")
+    elif user_role == Role.ADMIN:
+        return render_template("dashboard/dashboard_admin.html")
