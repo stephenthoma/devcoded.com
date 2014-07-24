@@ -1,3 +1,8 @@
+/*
+ * Source: http://tympanus.net/codrops/2013/05/02/vertical-timeline/
+ * Heavily modified responsive CSS timeline
+*/
+
 .cbp_tmtimeline {
 	margin: 30px 0 0 0;
 	padding: 0;
@@ -17,6 +22,12 @@
 	margin-right: -10px;
 }
 
+.cbp_tmtimeline.cbp_tmmiddle:before {
+  right: initial;
+  margin-right: none;
+  margin-left: -10px;
+}
+
 /* Right content */
 .cbp_tmtimeline > li .cbp_tmlabel {
 	margin: 15px 10% 0 15%;
@@ -28,6 +39,13 @@
 	line-height: 1.4;
 	position: relative;
 	border-radius: 1px;
+}
+
+.cbp_tmtimeline.cbp_tmmiddle > li .cbp_tmlabel {
+  margin: 15px 54% 0 15%;
+}
+.cbp_tmtimeline.cbp_tmmiddle > li:nth-child(even) .cbp_tmlabel {
+  margin: 15px 15% 0 53.4%;
 }
 
 .cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel {
@@ -52,6 +70,13 @@
 	top: 10px;
 }
 
+.cbp_tmtimeline.cbp_tmmiddle > li:nth-child(even) .cbp_tmlabel:after {
+  left: -6%;
+  margin-left: 2px;
+  border-left-color: transparent;
+  border-right-color: #3594cb;
+}
+
 .cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel:after {
 	border-left-color: #6cbfee;
 }
@@ -72,6 +97,11 @@
 	top: 40px;
   left: 20%;
 	margin: 0 0 -15px 73%;
+}
+
+.cbp_tmtimeline.cbp_tmmiddle > li .cbp_tmicon {
+  right: 25.1%;
+  left: initial;
 }
 
 .cbp_tmtimeline > li .cbp_add_tmlabel {
