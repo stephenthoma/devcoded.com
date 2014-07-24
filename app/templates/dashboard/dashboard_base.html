@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{ super() }}
+<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<header>
+  <div class="navbar">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="responsive-logo">
+            <a href="./" class="navbar-brand">
+              <img src="{{ url_for('static', filename='img/logo.png') }}" alt="DEVcoded">
+            </a>
+          </div>
+          <nav class="navbar-collapse collapse" role="navigation">
+            <ul class="nav navbar-nav navbar-right responsive-nav">
+              <li><a href="#settings">{{ current_user.email }}</a></li>
+              <li style="margin-left: 40px;"><a href={{ url_for('auth.logout') }}>Logout</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="row">
+  <div class="col-sm-2 navbar-default sidebar">
+    <ul class="nav" id="side-menu">
+        <li><a href="#home"><i class="fa fa-home"></i>Home</a></li>
+        {% block sidebar_items %}
+        {% endblock %}
+        <li><a href="#settings"><i class="fa fa-gears"></i>Settings</a></li>
+    </ul>
+  </div>
+  <div id="page-wrapper" class="col-sm-10 col-sm-offset-2 content">
+    {% block dash_content %}
+    {% endblock %}
+  </div>
+</div>
+{% endblock %}
