@@ -1,0 +1,10 @@
+{% extends "dashboard/navbar_dash.html" %}
+
+{% block styles %}
+    <link href="{{ url_for('static', filename='css/index.css') }}" rel="stylesheet">
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    order history
+{% endblock %}

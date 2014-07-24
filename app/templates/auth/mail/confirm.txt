@@ -1,0 +1,10 @@
+Welcome to DevCoded!
+Your account has been created, {{ user.username }}.
+
+To start using our service please confirm your email by going to the following link!
+{{ url_for('auth.confirm', token=token, _external=True) }}
+
+Sincerely,
+
+The DevCoded Staff
+

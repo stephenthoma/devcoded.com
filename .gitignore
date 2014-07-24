@@ -10,3 +10,8 @@ venv
 
 # OSX
 .DS_Store
+
+.*.swp
+
+#IntelliJ IDE
+.idea/

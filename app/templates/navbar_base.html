@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+<header class="header">
+  <div id="main-nav" class="navbar navbar-inverse bs-docs-nav" role="navigation">
+    <div class="container">
+      <div class="navbar-header responsive-logo">
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="./" class="navbar-brand">
+          <img src="{{ url_for('static', filename='img/logo.png') }}" alt="DEVcoded">
+        </a>
+      </div>
+      <nav class="navbar-collapse bs-navbar-collapse collapse" role="navigation" style="height: 1px;">
+        <ul class="nav navbar-nav navbar-right responsive-nav main-nav-list">
+          <li><a href="{{ url_for('main.index') }}#home">Home</a></li>
+          <li><a href="{{ url_for('main.index') }}#aboutus">About Us</a></li>
+          <li><a href="{{ url_for('main.index') }}#testimonials">Testimonials</a></li>
+          <li><a href="{{ url_for('main.index') }}#features">Features</a></li>
+          <li><a href={{ url_for('main.order') }}>Order</a></li>
+          {% if current_user.is_authenticated() %}
+              <li style="margin-left:40px"> <a href={{ url_for('dashboard.dash') }}>Dashboard</a></li>
+              <li><a href={{ url_for('auth.logout') }}>Logout</a></li>
+          {% else %}
+             <li style="margin-left:40px"><a href={{ url_for('auth.login') }}>Login</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+{% endblock %}

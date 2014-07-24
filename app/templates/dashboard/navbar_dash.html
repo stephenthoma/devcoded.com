@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+    <header class="header">
+        <div id="main-nav" class="navbar navbar-inverse bs-docs-nav" role="navigation">
+            <div class="container">
+                <div class="navbar-header responsive-logo">
+                    <a href="./" class="navbar-brand">
+                        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="DEVcoded">
+                    </a>
+                </div>
+                <nav class="navbar-collapse bs-navbar-collapse collapse" role="navigation" style="height: 50px;">
+                    <ul class="nav navbar-nav navbar-right responsive-nav main-nav-list">
+                        <li><a href="{{ url_for('dashboard.dash') }}">Overview</a></li>
+                        <li><a href="{{ url_for('dashboard.dash') }}/orders">Orders</a></li>
+                        <li><a href="{{ url_for('dashboard.dash') }}/xyz">xyz</a></li>
+                        <li><a href="{{ url_for('dashboard.dash') }}/history">History</a></li>
+                        <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                        <li style="margin-left:40px"><a href={{ url_for('auth.logout') }}>Logout</a></li>
+
+                        Logged in as {{ current_user.email }}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% macro render_sitem(endpoint, display, cls='', iconcls='', active='') %}
+    <li {% if request.endpoint == endpoint or active == endpoint %} class='active' {% endif %}>
+        <a class='{{cls}}' href="{{url_for(endpoint)}}"><i class="{{iconcls}}"></i> {{display}}</a>
+    </li>
+{% endmacro %}

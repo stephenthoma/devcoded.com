@@ -1,0 +1,29 @@
+{% extends "navbar_base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block body_attribs %} style="background-color: rgba(64,64,64,1);" {% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 col-md-offset-1 error-body">
+      <span>403</span> ACCESS DENIED
+      <p>Want to head back to <a href="{{ url_for('main.index') }}">charted waters</a>?</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <span class="pull-left">© 2014 DEVCoded</span>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-md-6">
+        <span>Need to get in touch? Contact us at <a href="mailto:contact@devcoded.com">contact@devcoded.com</a></span>
+      </div>
+    </div>
+  </div>
+</footer>
+{% endblock %}

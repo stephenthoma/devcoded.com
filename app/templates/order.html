@@ -1,0 +1,285 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{ super() }}
+<link href="{{ url_for('static', filename='css/lib/timeline.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+  {%if messages %}
+    {% for message in messages %}
+      <span>{{ message }}</span>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{% if form.errors %}
+  {% for error in form.errors %}
+    <span> {{ form.errors }} </span>
+  {% endfor %}
+{% endif %}
+
+<div class="container">
+  <div class="order-form-section">
+    <div class="section-title">
+      <h3 class="blue-text">Order a Plugin</h3>
+      <h5>Be sure to include as much detail as possible.</h5>
+    </div>
+    <form action="{{ url_for('main.order') }}" method="POST">
+      <div class="textbox-wrap clearfix"> <!-- SECTION: General -->
+        <label for="plugin-name" class="control-label">Plugin name</label>
+        <div class="col-md-4">
+          <div class="input-group col-md-12">
+            <span class="input-group-addon">
+              <i class="fa fa-star"></i>
+            </span>
+            {{ form.plugin_name(id="plugin-name", class="form-control", required="required") }}
+          </div>
+        </div>
+      </div>
+      <div class="textbox-wrap">
+        <label for="plugin-description" class="control-label">Plugin description</label>
+        <div class="col-md-5">
+          <div class="input-group col-md-12">
+            {{ form.plugin_desc(id="plugin-description", class="form-control", rows="5") }}
+          </div>
+        </div>
+      </div> <!-- END SECTION: General -->
+
+      <div class="hr"></div>
+
+      <div class="textbox-wrap"> <!-- SECTION: Commands -->
+        <label>Commands</label>
+        {{ form.commands() }}
+        <div class="command-group clearfix">
+          <div class="col-md-5">
+            <div class="input-group col-md-12">
+              <input required="required" id="commands-0-command_name" name="commands-0-command_name" class="form-control command-name" placeholder="/command [arg] [value]">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="input-group col-md-12">
+              <input required="required" id="commands-0-command_perm" name="commands-0-command_perm" class="form-control command-permission" placeholder="permission.node">
+            </div>
+          </div>
+          <div class="col-md-offset-3 col-md-8">
+            <div class="input-group col-md-12">
+              <input required="required" id="commands-0-command_desc" name="commands-0-command_desc" class="form-control" placeholder="Command description">
+            </div>
+          </div>
+          <button disabled style="color: #ccc;" class="fa fa-large fa-minus-circle icon-button"></button>
+        </div>
+
+        <div class="col-md-12">
+          <button id="mk-command" class="btn btn-success pull-right custom-button green-btn">
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
+      </div> <!-- END SECTION: Commands -->
+
+      <div class="hr"></div>
+
+      <div class="textbox-wrap"> <!-- SECTION: Permissions -->
+        <label>Additional Permissions</label>
+        <div class="command-group clearfix">
+          <div class="col-md-3">
+            <div class="input-group col-md-12">
+              <input required="required" id="permissions-0-permission_name" name="permissions-0-permission_name" class="form-control" placeholder="permission.node">
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="input-group col-md-12">
+              <input required="required" id="permissions-0-permission_desc" name="permissions-0-permission_desc" class="form-control" placeholder="Permission description">
+            </div>
+          </div>
+          <button disabled style="color: #ccc;" class="fa fa-large fa-minus-circle icon-button"></button>
+        </div>
+        <div class="col-md-12">
+          <button id="mk-perm" class="btn btn-success pull-right custom-button green-btn">
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
+      </div> <!-- END SECTION: Permissions -->
+
+      <div class="hr"></div>
+
+      <div class="textbox-wrap"> <!-- SECTION: Configuration -->
+        <label>Configuration</label>
+        <div class="command-group clearfix">
+          <div class="col-md-2">
+            <div class="input-group col-md-12">
+              <input required="required" id="configs-0-config_name" name="configs-0-config_name" class="form-control" placeholder="Name">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="input-group col-md-12">
+              <input required="required" id="configs-0-config_val" name="configs-0-config_val" class="form-control" placeholder="Value">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="input-group col-md-12">
+              <input required="required" id="configs-0-config_desc" name="configs-0-config_desc" class="form-control" placeholder="Description">
+            </div>
+          </div>
+          <button disabled style="color: #ccc;" class="fa fa-large fa-minus-circle icon-button"></button>
+        </div>
+        <div class="col-md-12">
+          <button id="mk-config" class="btn btn-success pull-right custom-button green-btn">
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
+      </div> <!-- END SECTION: Configuration -->
+
+      <div class="hr"></div>
+
+      <div class="textbox-wrap clearfix"> <!-- SECTION: Events -->
+        <label>Event Timeline</label>
+        <ul style="margin-left:14%;" class="cbp_tmtimeline">
+          <li style="margin-bottom: 0px;" class="command-group">
+            <div class="cbp_tmicon">
+              <button disabled class="fa fa-circle"></button>
+            </div>
+            <div class="cbp_tmlabel">
+              <div class="input-group col-md-12">
+                <input required="required" id="events-0-action" name="events-0-action" class="form-control" placeholder="Action (ie. command, event)">
+              </div>
+              <div class="hr"></div>
+              <div class="input-group col-md-12">
+                <input required="required" id="events-0-result" name="events-0-result" class="form-control" placeholder="Result (ie. what the plugin does)">
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="cbp_tmicon cbp_add_tmlabel">
+              <button id="mk-event" class="fa fa-plus"></button>
+            </div>
+          </li>
+        </ul>
+      </div> <!-- END SECTION: Events -->
+
+      {{ form.csrf_token }}
+      <div class="col-md-12 clearfix">
+        <button type="submit" class="btn btn-success pull-right custom-button green-btn">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script id="command-template" type="text/x-jquery-tmpl">
+<div class="command-group clearfix">
+  <div class="col-md-offset-3 col-md-5">
+    <div class="input-group col-md-12">
+      <input required="required" id="commands-${idx}-command_name" name="commands-${idx}-command_name" class="form-control command-name" placeholder="/command [arg] [value]">
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="input-group col-md-12">
+      <input required="required" id="commands-${idx}-command_perm" name="commands-${idx}-command_perm" class="form-control command-permission" placeholder="permission.node">
+    </div>
+  </div>
+  <div class="col-md-offset-3 col-md-8">
+    <div class="input-group col-md-12">
+      <input required="required" id="commands-${idx}-command_desc" name="commands-${idx}-command_desc" class="form-control" placeholder="Command description">
+    </div>
+  </div>
+  <button class="fa fa-large fa-minus-circle icon-button rm-item"></button>
+</div>
+</script>
+
+<script id="permission-template" type="text/x-jquery-tmpl">
+<div class="command-group clearfix">
+  <div class="col-md-offset-3 col-md-3">
+    <div class="input-group col-md-12">
+      <input id="permissions-${idx}-permission_name" name="permissions-${idx}-permission_name" class="form-control", placeholder="permission.node">
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="input-group col-md-12">
+      <input id="permissions-${idx}-permission_desc" name="permissions-${idx}-permission_desc" class="form-control", placeholder="Permission description">
+    </div>
+  </div>
+  <button class="fa fa-large fa-minus-circle icon-button rm-item"></button>
+</div>
+</script>
+
+<script id="configuration-template" type="text/x-jquery-tmpl">
+<div class="command-group clearfix">
+  <div class="col-md-offset-3 col-md-2">
+    <div class="input-group col-md-12">
+      <input required="required" id="configs-${idx}-config_name" name="configs-${idx}-config_name"class="form-control" placeholder="Name">
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="input-group col-md-12">
+      <input required="required" id="configs-${idx}-config_val" name="configs-${idx}-config_val" class="form-control" placeholder="Value">
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="input-group col-md-12">
+      <input required="required" id="configs-${idx}-config_desc" name="configs-${idx}-config_desc" class="form-control" placeholder="Description">
+    </div>
+  </div>
+  <button class="fa fa-large fa-minus-circle icon-button rm-item"></button>
+</div>
+</script>
+
+<script id="event-template" type="text/x-jquery-tmpl">
+<li style="margin-bottom: 0px;" class="command-group">
+  <div class="cbp_tmicon rm-event-buttons">
+    <button class="fa fa-circle rm-item"></button>
+  </div>
+  <div class="cbp_tmlabel">
+    <div class="input-group col-md-12">
+      <input required="required" id="events-${idx}-action" name="events-${idx}-action" class="form-control input-lg" placeholder="Action (ie. command, event)">
+    </div>
+    <div class="hr"></div>
+    <div class="input-group col-md-12">
+      <input required="required" id="events-${idx}-result" name="events-${idx}-result" class="form-control input-lg" placeholder="Result (ie. what the plugin does">
+    </div>
+  </div>
+</li>
+<li>
+</script>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/lib/jquery.tmpl.js') }}"></script>
+
+<script>
+function insertTemplateOnClick(button_id, template_id, dist) {
+  $(button_id).on("click", function(e) {
+    e.preventDefault(); // Don't submit on click
+    var count = 1 + parseInt($(this).parents().eq(dist).siblings(".command-group").last().find("input").first().attr("id").replace(/[^\d.]/g, ""));
+    if(isNaN(count)) { count = 1; };
+    rendered_template = $(template_id).tmpl({idx: count});
+    $(this).parents().eq(dist).siblings(".command-group").last().after( rendered_template );
+  });
+};
+
+$(document).ready(function(){
+  $(document).on("click", ".rm-item", function (e) {
+    //[TODO]: Decrement idx of subsequent items
+    e.preventDefault();
+    $(this).closest(".command-group").remove();
+  });
+
+  $(document).on("keyup", ".command-name", function () {
+    var clean_plugin_name = $("#plugin-name").val().split(" ")[0].toLowerCase().replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-');
+    var clean_command_name = $(this).val().split(" ")[0].toLowerCase().replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-');
+
+    var perm_ele = $(this).parents(':eq(1)').siblings(".col-md-3").children().children();
+    $(perm_ele).val(clean_plugin_name + '.' + clean_command_name)
+  });
+
+  insertTemplateOnClick("#mk-command", "#command-template", 0);
+  insertTemplateOnClick("#mk-perm", "#permission-template", 0);
+  insertTemplateOnClick("#mk-config", "#configuration-template", 0);
+  insertTemplateOnClick("#mk-event", "#event-template", 1);
+});
+
+</script>
+{% endblock %}
