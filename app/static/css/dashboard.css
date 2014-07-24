@@ -11,7 +11,7 @@ body {
 @media(min-width:768px) {
   #page-wrapper {
     position: inherit;
-    padding: 0 30px;
+    padding: 0 30px 30px 30px;
     border-left: 1px solid #e7e7e7;
   }
 }
@@ -92,4 +92,16 @@ body {
   margin-bottom: 0px;
   padding-bottom: 5px;
   padding-left: 12px;
+}
+
+.cbp_tmtimeline.cbp_tmmiddle > li {
+  margin-top: -50px;
+}
+.cbp_tmtimeline.cbp_tmmiddle > li:first-child {
+  margin-top: inherit;
+}
+
+.cbp_tmlabel .timestamp {
+  font-size: small;
+  color: #f9f9f9;
 }
