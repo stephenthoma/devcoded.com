@@ -111,6 +111,14 @@ h5 {
 h6 {
   font-size: 16px;
 }
+.hr {
+  background: rgba(240, 240, 240, 1.0);
+  margin-bottom: 15px;
+  height: 1px;
+  clear: both;
+  border: none;
+}
+
 /* ---- COLOURS ---- */
 
 .red-bg {
@@ -514,14 +522,6 @@ footer span {
   max-width: 900px;
   margin: 0 auto;
   margin-top: 50px;
-}
-
-.order-form-section .hr {
-  background: rgba(240, 240, 240, 1.0);
-  margin-bottom: 15px;
-  height: 1px;
-  clear: both;
-  border: none;
 }
 
 .order-form-section .custom-button {
