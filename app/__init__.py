@@ -7,6 +7,9 @@ from flask.ext.login import LoginManager
 from config import config
 import balanced
 
+from flask_debugtoolbar import DebugToolbarExtension
+
+
 
 bootstrap = Bootstrap()
 mail = Mail()
@@ -26,6 +29,8 @@ def create_app(config_name):
     db.init_app(app)
     login_manager.init_app(app)
     balanced.configure(app.config['BALANCED_API_KEY'])
+
+    toolbar = DebugToolbarExtension(app)
 
     if not app.debug and not app.testing and not app.config['SSL_DISABLE']:
         from flask.ext.sslify import SSLify
