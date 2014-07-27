@@ -340,7 +340,7 @@ class PluginFile(db.Model):
     __tablename__ = 'plugin_files'
     id = db.Column(db.Integer, primary_key=True)
     plugin_id = db.Column(db.Integer, db.ForeignKey('plugins.id'))
-    file_path = db.Column(db.String(128))
+    file_url = db.Column(db.String(128))
 
     def to_json(self):
         file = {
