@@ -1,11 +1,12 @@
 from flask import jsonify, request, current_app, url_for
 from . import api
+from .helpers import respond
 from ..models import User, Plugin
 
 @api.route('/users/<int:id>')
 def get_user(id):
     user = User.query.get_or_404(id)
-    return jsonify(user.to_json())
+    return jsonify(respond(200, user.to_json()))
 
 @api.route('/users/<int:id>/plugins/')
 def get_user_plugins(id):
@@ -14,9 +15,10 @@ def get_user_plugins(id):
     x = list()
     for p in plugins:
         x.append(p.id)
-    return jsonify({'plugin_ids': x})
+    return jsonify(respond(200, {'plugin_ids': x}))
 
 @api.route('/users/search/<username>')
 def get_user_id(username):
-    id = User.query.filter_by(username=username).first().id
-    return jsonify({'id': id})
+    try: id = User.query.filter_by(username=username).first().id
+    except: return jsonify(respond(404))
+    return jsonify(respond(200, {'username': username, 'id': id}))
