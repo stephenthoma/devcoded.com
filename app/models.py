@@ -252,6 +252,7 @@ class Plugin(db.Model):
     def to_json(self):
         json_plugin = {
                 'name': self.name,
+                'creator': self.user_id,
                 'description': self.description,
                 'commands': self._to_json_helper(self.commands),
                 'permissions': self._to_json_helper(self.permissions),
