@@ -18,6 +18,13 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
 
+    def readable_role(self):
+        roles = {1:'User', 2:'Developer', 3:'Administrator'}
+        for r in roles:
+            if r == self.role:
+                return roles[r]
+        return "Undefined"
+
     @staticmethod
     def generate_fake(count=100):
         from sqlalchemy.exc import IntegrityError

@@ -18,32 +18,81 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <!-- TODO change number to role name -->
-            <h3 class="text-left">Settings - {{ current_user.role }}</h3>
+            <h3 class="text-left">Settings - {{ current_user.readable_role() }}
+            </h3>
             <div class="hr"></div>
         </div>
     </div>
 
     <div class="row">
         <div class="col-sm-12">
-            <div class="group-topper infobar clearfix">
+            <div class="group-topper">
                 <form action="{{ url_for('dashboard.settings') }}" method="POST">
-                  {% for field in form %}
-                      {% if not field.is_hidden %}
-                          <p>
-                              {% if field.errors %}
-                                  {% for error in field.errors %}
-                                      <div class="animated bounceInLeft form-error-box" data-animation="bounceInLeft">
-                                          <span>{{ error }}</span>
-                                      </div>
-                                  {% endfor %}
-                              {% endif %}
-                              {{ field.label_tag }} {{ field }}
-                          </p>
-                      {% endif %}
-                  {% endfor %}
+                    <!-- EMAIL CHANGE -->
+                    {{ form.email.label }}
+                    <div class="textbox-wrap">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                              <i class="fa fa-envelope-o"></i>
+                            </span>
+                            {{ form.email(class="form-control",  value=current_user.email, placeholder="email") }}
+                        </div>
+                        <b>Status: <span style="color:
+                            {% if current_user.confirmed %} green"> Confirmed
+                            {% else %} red"> Unconfirmed
+                            {% endif %} </span>
+                        </b>
+                    </div>
+
+                    <hr>
+                    <!-- PASSWORD CHANGE -->
+                    <div class="textbox-wrap">
+                        {{ form.password.label }}
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                              <i class="fa fa-lock"></i>
+                            </span>
+                            {{ form.password(class="form-control", placeholder="password") }}
+                        </div>
+                    </div>
+                    <div class="textbox-wrap">
+                        {{ form.password2.label }}
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                              <i class="fa fa-lock"></i>
+                            </span>
+                            {{ form.password2(class="form-control", placeholder="password") }}
+                        </div>
+                    </div>
+
+                    <!-- OPTIONS CHANGE -->
+                    <div class="textbox-wrap">
+                        {{ form.receiveMail.label }}
+                        <div class="input-group">
+                            <i class="fa fa-share"></i>
+                            {{ form.receiveMail(class="form-control")}}
+                        </div>
+                    </div>
+
+                    {{ form.csrf_token }}
+                    <div class="form-action clearfix">
+                        <button type="submit" class="btn btn-success pull-center custom-button green-btn">
+                            Update &nbsp;<i class="fa fa-save"></i>
+                        </button>
+                        <button type="button" value="delete-account" name=delete-account" id="delete-account" class="btn pull-center custom-button red-btn">
+                            Delete account &nbsp;<i class="fa fa-times"></i>
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 {% endblock %}
+
+<script type="application/javascript">
+    $(document).ready(function(){
+        $("#delete-account").click(function(){
+            alert('clicked delete');
+        })
+    })
+</script>
