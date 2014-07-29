@@ -14,14 +14,14 @@ class SettingsForm(Form):
         DataRequired(),
         Length(8,64, message='Password must be more than 8 characters long.'),
         EqualTo('password2', message='Passwords must match.')])
-    password2 = PasswordField('Confirm password', validators=[DataRequired()])
+    password2 = PasswordField('Password again', validators=[DataRequired()])
 
     receiveMail = BooleanField('Receive update mails')
     option1 = BooleanField('Option 1')
     option2 = BooleanField('Option 2')
     option3 = BooleanField('Option 3')
 
-    password2 = PasswordField('Password confirmation', validators=[DataRequired()])
+    passwordConfirm = PasswordField('Password confirmation', validators=[DataRequired()])
 
     update = SubmitField('Update')
     delete = SubmitField('Delete account')
