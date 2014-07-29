@@ -7,7 +7,7 @@ from flask.ext.login import UserMixin, AnonymousUserMixin
 from datetime import datetime
 from . import db, login_manager
 
-class Role:
+class Role():
     ADMIN = 0x03
     DEV   = 0x02
     USER  = 0x01
