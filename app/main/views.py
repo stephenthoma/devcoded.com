@@ -7,6 +7,13 @@ from .. import db
 from ..email import send_email
 from ..models import User, Plugin, PluginConfig, PluginPermission, \
                      PluginCommand, PluginEvent
+from datetime import datetime
+
+@main.before_request
+def before_request():
+    if current_user.is_authenticated():
+        current_user.last_seen = datetime.utcnow()
+
 
 @main.route('/')
 def index():

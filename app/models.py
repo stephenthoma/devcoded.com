@@ -2,6 +2,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app, request, url_for
 from flask.ext.login import UserMixin, AnonymousUserMixin
+from datetime import datetime
 from . import db, login_manager
 
 class Role:
@@ -17,6 +18,8 @@ class User(UserMixin, db.Model):
     role = db.Column(db.Integer, default=Role.USER)
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
+    about_Me = db.Column(db.String(150))
+    last_seen = db.Column(db.DateTime, default = datetime.utcnow())
 
     @staticmethod
     def generate_fake(count=100):
