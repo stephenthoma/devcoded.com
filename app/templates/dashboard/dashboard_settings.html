@@ -6,6 +6,15 @@
 {% endblock %}
 
 {% block dash_content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="animated bounceInLeft form-error-box" data-animation="bounceInLeft">
+                {% for message in messages %}
+                    <span>{{ message }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
 
     <div class="row">
         <div class="col-sm-12">
@@ -20,7 +29,18 @@
             <div class="group-topper infobar clearfix">
                 <form action="{{ url_for('dashboard.settings') }}" method="POST">
                   {% for field in form %}
-                      <p>{{ field.label_tag }} {{ field }} </p>
+                      {% if not field.is_hidden %}
+                          <p>
+                              {% if field.errors %}
+                                  {% for error in field.errors %}
+                                      <div class="animated bounceInLeft form-error-box" data-animation="bounceInLeft">
+                                          <span>{{ error }}</span>
+                                      </div>
+                                  {% endfor %}
+                              {% endif %}
+                              {{ field.label_tag }} {{ field }}
+                          </p>
+                      {% endif %}
                   {% endfor %}
                 </form>
             </div>
