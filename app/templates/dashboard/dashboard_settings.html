@@ -1,0 +1,29 @@
+{% extends "dashboard/dashboard_base.html" %}
+
+{% block styles %}
+    {{ super() }}
+    <link href="{{ url_for('static', filename='css/lib/timeline.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block dash_content %}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- TODO change number to role name -->
+            <h3 class="text-left">Settings - {{ current_user.role }}</h3>
+            <div class="hr"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="group-topper infobar clearfix">
+                <form action="{{ url_for('dashboard.settings') }}" method="POST">
+                  {% for field in form %}
+                      <p>{{ field.label_tag }} {{ field }} </p>
+                  {% endfor %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
