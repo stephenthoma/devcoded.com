@@ -10,7 +10,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="group-topper">
-            <form action="{{ url_for('dashboard.dash') }}" method="POST">
+            <form action="{{ url_for('dashboard.dash') + "#settings"}}" method="POST">
                 <!-- EMAIL CHANGE -->
                 {{ form.email.label }}
                 <div class="textbox-wrap">
