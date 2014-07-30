@@ -6,18 +6,17 @@ from .. import db
 from ..models import User, Role
 from .forms import SettingsForm
 
-@dashboard.route('/')
+@dashboard.route('/', defaults={'path': ''}, methods=['GET', 'POST'])
+@dashboard.route('/<path:path>')
 @login_required
-def dash():
-    user_role = current_user.role
-    if user_role  == Role.USER:
-        return render("dashboard_user")
-    elif user_role == Role.DEV:
-        return render("dashboard_developer")
-    elif user_role == Role.ADMIN:
-        return render("dashboard_admin")
+def dash(path):
+    form = SettingsForm()
+    if form.validate_on_submit():
+        flash('submitted')
 
-@dashboard.route('/settings', methods=['GET', 'POST'])
+    return render_template("dashboard/dashboard_" + current_user.readable_role() + ".html", form=form)
+
+@dashboard.route('/settings', )
 @login_required
 def settings():
     #TEMPORALY
@@ -25,7 +24,7 @@ def settings():
     if form.validate_on_submit():
         flash('submitted')
 
-    return render_template("dashboard/dashboard_settings.html", form=form)
+    return render_template("dashboard/user_settings.html", form=form)
 
 def render(url):
     if not url.endswith(".html"):

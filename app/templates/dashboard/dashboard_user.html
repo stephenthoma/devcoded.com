@@ -7,77 +7,10 @@
 
 {% block dash_content %}
 {{ super() }}
-<div class="row">
-  <div class="col-sm-12">
-    <h3 class="text-left">Home</h3>
-    <div class="hr"></div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-8">
-    <div class="table-responsive">
-      <div class="table-topper">
-        <h4 class="text-left">Plugin overview</h4>
-      </div>
-      <table class="table table-striped">
-        <tr>
-          <td>Plugin name</td>
-          <td>Plugin description that is kind of longish but also truncated at around fifteen words...</td>
-          <td><i class="fa fa-dot-circle-o"></i></td>
-        </tr>
-        <tr>
-          <td>Plugin name</td>
-          <td>Plugin description that is kind of longish but also truncated at around fifteen words...</td>
-          <td><i class="fa fa-dot-circle-o"></i></td>
-        </tr>
-        <tr>
-          <td>Plugin name</td>
-          <td>Plugin description that is kind of longish but also truncated at around fifteen words...</td>
-          <td><i class="fa fa-dot-circle-o"></i></td>
-        </tr>
-      </table>
-    </div>
-  </div>
-  <div class="col-sm-3">
-    <div class="group-topper">
-      <h4 class="text-left">Actions</h4>
-    </div>
-    <div class="group">
-      <div class="row">
-        <button class="btn custom-button blue-btn"><a href="{{ url_for('main.order') }}">Order a plugin</a></button>
-      </div>
-      <div class="row">
-        <button class="btn custom-button red-btn"><a href="mailto:contact@devcoded.com">Get some help?</a></button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-12">
-    <div class="group-topper infobar clearfix">
-      <div class="col-sm-3">
-        <h4 class="text-left">Plugin name</h4>
-      </div>
-      <div class="col-sm-2">
-        <h5><i class="fa fa-calendar"></i>: 04.12.2013</h5>
-      </div>
-      <div class="col-sm-7">
-        <h5><strong>Status:</strong> under development, on time.</h5>
-      </div>
-    </div>
-    <div class="col-sm-12 group">
-      <ul class="cbp_tmtimeline cbp_tmmiddle">
-        <li>
-          <div class="cbp_tmicon">
-            <i class="fa fa-circle"></i>
-          </div>
-          <div class="cbp_tmlabel">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
-            <span class="pull-right timestamp">&mdash;13:14 03.12.3012</span>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
+    <span id="home">
+        {% include "dashboard/home/" + current_user.readable_role() + "_home.html" ignore missing %}
+    </span>
+    <span id="settings">
+        {% include "dashboard/settings/" + current_user.readable_role() + "_settings.html" ignore missing %}
+    </span>
 {% endblock %}
