@@ -96,7 +96,7 @@
                     <button type="submit" class="btn btn-success pull-center custom-button green-btn">
                         Update &nbsp;<i class="fa fa-save"></i>
                     </button>
-                    <a href="{{ url_for('auth.delete_account') }}"><button onclick="return checkDelete();" type="button" value="delete-account" name=delete-account" id="delete-account"
+                    <a href="{{ url_for('auth.delete_account') }}"><button onclick="return confirm('Are you sure you want to delete your account?');" type="button" value="delete-account" name=delete-account" id="delete-account"
                             class="btn pull-center custom-button red-btn">
                         Delete account &nbsp;<i class="fa fa-times"></i>
                     </button></a>
