@@ -5,9 +5,14 @@
 <link href="{{ url_for('static', filename='css/lib/timeline.css') }}" rel="stylesheet">
 {% endblock %}
 
+{% block sidebar_items %}
+    {{ super() }}
+    <li><a href="#plugins" onclick="show('plugins');"><i class="fa fa-list"></i>Plugins</a></li>
+{% endblock %}
+
 {% block dash_content %}
 {{ super() }}
-    <span id="plugins">
+    <span id="plugins" class="dash-content">
         {% include "dashboard/plugins.html" ignore missing %}
     </span>
 {% endblock %}

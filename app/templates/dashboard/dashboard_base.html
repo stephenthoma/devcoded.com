@@ -40,10 +40,10 @@
     <div class="row">
         <div class="col-sm-2 navbar-default sidebar">
             <ul class="nav" id="side-menu">
-                <li><a href="#home"><i class="fa fa-home"></i>Home</a></li>
+                <li><a href="#home" onclick="show('home');"><i class="fa fa-home"></i>Home</a></li>
                 {% block sidebar_items %}
                 {% endblock %}
-                <li><a href="#settings"><i class="fa fa-gears"></i>Settings</a></li>
+                <li><a href="#settings" onclick="show('settings');"><i class="fa fa-gears"></i>Settings</a></li>
             </ul>
         </div>
         <div id="page-wrapper" class="col-sm-10 col-sm-offset-2 content">
@@ -54,6 +54,38 @@
     </div>
 {% endblock %}
 
-<script>
+{% block scripts %}
+    {{ super() }}
+    <script>
+        var current;
+        $(document).ready(function(){
+            hideAll();
+            var start = 'home';
+            var href = $(window.location).attr("href");
+            var index = href.lastIndexOf('#');
+            if (index > -1){
+                if ($(href.substr(index + 1)).length > 0){
+                    start = href.substr(index + 1);
+                }
+            }
 
-</script>
+            show(start);
+        })
+
+       function hideAll(){
+           $('.dash-content').each(function(i, obj){
+               hide(obj.id);
+           });
+       }
+
+       function show(id){
+           hide(current);
+           $("#" + id).show();
+           current = id;
+       }
+
+       function hide(id){
+           $("#" + id).hide();
+       }
+    </script>
+{% endblock %}
