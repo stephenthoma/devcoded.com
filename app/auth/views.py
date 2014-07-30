@@ -210,3 +210,11 @@ def change_email(token):
     else:
         flash('Invalid request.')
     return redirect(url_for('main.index'))
+
+@auth.route('/delete-account')
+@login_required
+def delete_account():
+    db.session.delete(current_user)
+    db.session.commit()
+    flash('Your account has been deleted.')
+    return redirect(url_for('main.index'))
