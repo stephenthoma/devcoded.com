@@ -95,6 +95,9 @@
                         </div>
                     </div>
 
+                    {% block dash_settings %}
+                    {% endblock %}
+
                     <hr>
                     {{ form.csrf_token }}
                     <!-- CONFIRMATION AND BUTTONS -->
@@ -110,9 +113,9 @@
                         <button type="submit" class="btn btn-success pull-center custom-button green-btn">
                             Update &nbsp;<i class="fa fa-save"></i>
                         </button>
-                        <button type="button" value="delete-account" name=delete-account" id="delete-account" class="btn pull-center custom-button red-btn">
+                        <a href={{ url_for('auth.delete_account') }}><button onclick='return checkDelete();' type="button" value="delete-account" name=delete-account" id="delete-account" class="btn pull-center custom-button red-btn">
                             Delete account &nbsp;<i class="fa fa-times"></i>
-                        </button>
+                        </button></a>
                     </div>
                 </form>
             </div>
@@ -125,12 +128,9 @@
 
     <script>
         $(document).ready(function() {
-            $("#delete-account").click(function(){
-                //TODO check if user is certain
-                if (confirm('Are you sure you want to delete your account?')){
-                    //TODO delete
-                }
-            })
+            checkDelete = function(){
+                return confirm('Are you sure you want to delete your account?');
+            }
         })
     </script>
 {% endblock %}
