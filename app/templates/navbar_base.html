@@ -30,6 +30,16 @@
           {% endif %}
         </ul>
       </nav>
+        <!-- Display flash messages directly under the navbar -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="animated bounceInLeft form-error-box" data-animation="bounceInLeft">
+                    {% for message in messages %}
+                        <span>{{ message }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
     </div>
   </div>
 </header>
