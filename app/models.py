@@ -248,6 +248,7 @@ class Plugin(db.Model):
     __tablename__ = 'plugins'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    developer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     name = db.Column(db.String(64))
     description = db.Column(db.Text)
     commands = db.relationship('PluginCommand')
