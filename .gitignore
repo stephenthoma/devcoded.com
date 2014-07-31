@@ -18,3 +18,5 @@ venv
 
 #Dev databases
 *.sqlite
+
+.env-vars
