@@ -38,8 +38,8 @@
                   <i class="fa fa-envelope-o"></i>
                 </span>
                 <!-- A second email field will remove autocomplete -->
-                {{ form.email(id="email_fake", class="hidden", autocomplete="off", style="display:none;") }}
                 {{ form.email(class="form-control",  value=current_user.email, placeholder="email", autocomplete="off") }}
+                {{ form.email(id="email_fake", class="hidden", autocomplete="off", style="display:none;") }}
               </div>
             </div>
             <div class="col-sm-5 text-left">
