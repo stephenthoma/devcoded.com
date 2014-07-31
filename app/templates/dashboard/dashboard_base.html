@@ -1,91 +1,91 @@
 {% extends "base.html" %}
 
 {% block styles %}
-    {{ super() }}
-    <link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+  {{ super() }}
+  <link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
-    <header>
-        <div class="navbar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="responsive-logo">
-                            <a href="./" class="navbar-brand">
-                                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="DEVcoded">
-                            </a>
-                        </div>
-                        <nav class="navbar-collapse collapse" role="navigation">
-                            <ul class="nav navbar-nav navbar-right responsive-nav">
-                                <li><a href="#settings" onclick="show('settings'); return false;">{{ current_user.email }}</a></li>
-                                <li style="margin-left: 40px;"><a href={{ url_for('auth.logout') }}>Logout</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+  <header>
+    <div class="navbar">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="responsive-logo">
+              <a href="./" class="navbar-brand">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="DEVcoded">
+              </a>
             </div>
+            <nav class="navbar-collapse collapse" role="navigation">
+              <ul class="nav navbar-nav navbar-right responsive-nav">
+                <li><a href="#settings" onclick="show('settings'); return false;">{{ current_user.email }}</a></li>
+                <li style="margin-left: 40px;"><a href={{ url_for('auth.logout') }}>Logout</a></li>
+              </ul>
+            </nav>
+          </div>
         </div>
-        <!-- Display flash messages directly under the navbar -->
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="animated bounceInLeft form-error-box" data-animation="bounceInLeft">
-                    {% for message in messages %}
-                        <span>{{ message }}</span>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
-    </header>
-    <div class="row">
-        <div class="col-sm-2 navbar-default sidebar">
-            <ul class="nav" id="side-menu">
-                <li><a href="#home" onclick="show('home'); return false;"><i class="fa fa-home"></i>Home</a></li>
-                {% block sidebar_items %}
-                {% endblock %}
-                <li><a href="#settings" onclick="show('settings'); return false;"><i class="fa fa-gears"></i>Settings</a></li>
-            </ul>
-        </div>
-        <div id="page-wrapper" class="col-sm-10 col-sm-offset-2 content">
-            {% block dash_content %}
-
-            {% endblock %}
-        </div>
+      </div>
     </div>
+    <!-- Display flash messages directly under the navbar -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="animated bounceInLeft form-error-box" data-animation="bounceInLeft">
+          {% for message in messages %}
+            <span>{{ message }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+  </header>
+  <div class="row">
+    <div class="col-sm-2 navbar-default sidebar">
+      <ul class="nav" id="side-menu">
+        <li><a href="#home" onclick="show('home'); return false;"><i class="fa fa-home"></i>Home</a></li>
+        {% block sidebar_items %}
+        {% endblock %}
+        <li><a href="#settings" onclick="show('settings'); return false;"><i class="fa fa-gears"></i>Settings</a></li>
+      </ul>
+    </div>
+    <div id="page-wrapper" class="col-sm-10 col-sm-offset-2 content">
+      {% block dash_content %}
+
+      {% endblock %}
+    </div>
+  </div>
 {% endblock %}
 
 {% block scripts %}
-    {{ super() }}
-    <script>
-        $(document).ready(function(){
-            hideAll();
-            var start = 'home';
-            var href = $(window.location).attr("href");
-            var index = href.lastIndexOf('#');
-            if (index > -1){
-                if ($("#" + href.substr(index + 1)).length > 0){
-                    start = href.substr(index + 1);
-                }
-            }
+  {{ super() }}
+  <script>
+    $(document).ready(function () {
+      hideAll();
+      var start = 'home';
+      var href = $(window.location).attr("href");
+      var index = href.lastIndexOf('#');
+      if (index > -1) {
+        if ($("#" + href.substr(index + 1)).length > 0) {
+          start = href.substr(index + 1);
+        }
+      }
 
-            show(start);
-        })
+      show(start);
+    })
 
-       function hideAll(){
-           $('.dash-content').each(function(i, obj){
-               hide(obj.id);
-           });
-       }
+    function hideAll() {
+      $('.dash-content').each(function (i, obj) {
+        hide(obj.id);
+      });
+    }
 
-       function show(id){
-           hide(window["currentPage"]);
-           $("#" + id).show();
-           window["currentPage"] = id;
-           window.history.pushState("", "", "#" + id);
-       }
+    function show(id) {
+      hide(window["currentPage"]);
+      $("#" + id).show();
+      window["currentPage"] = id;
+      window.history.pushState("", "", "#" + id);
+    }
 
-       function hide(id){
-           $("#" + id).hide();
-       }
-    </script>
+    function hide(id) {
+      $("#" + id).hide();
+    }
+  </script>
 {% endblock %}
