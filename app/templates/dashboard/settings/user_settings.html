@@ -20,7 +20,14 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="group-topper">
-      <form action="{{ url_for('dashboard.dash') + "#settings"}}" method="POST" class="settings-form">
+      {% if form.errors %}
+        {% for error in form.errors %}
+          <div class="animated bounceInLeft form-error-box" data-animation="bounceInLeft">
+            <span>{{ form.errors[error][0] }}</span>
+          </div>
+        {% endfor %}
+      {% endif %}
+      <form action="{{ url_for('dashboard.dash') + "#settings"}}" method="POST" class="settings-form" autocomplete="off">
         <!-- EMAIL CHANGE -->
         <div class="textbox-wrap">
           <div class="row">
@@ -30,7 +37,9 @@
                 <span class="input-group-addon">
                   <i class="fa fa-envelope-o"></i>
                 </span>
-                {{ form.email(class="form-control",  value=current_user.email, placeholder="email") }}
+                <!-- A second email field will remove autocomplete -->
+                {{ form.email(id="email_fake", class="hidden", autocomplete="off", style="display:none;") }}
+                {{ form.email(class="form-control",  value=current_user.email, placeholder="email", autocomplete="off") }}
               </div>
             </div>
             <div class="col-sm-5 text-left">
@@ -57,7 +66,7 @@
             <span class="input-group-addon">
               <i class="fa fa-lock"></i>
             </span>
-            {{ form.password(class="form-control", placeholder="password") }}
+            {{ form.password(class="form-control", placeholder="password", autocomplete="off") }}
           </div>
         </div>
         <div class="textbox-wrap">
