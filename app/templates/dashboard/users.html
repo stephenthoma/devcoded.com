@@ -1,8 +1,20 @@
 <div class="row">
   <div class="col-sm-12">
     <h3 class="text-left">Users</h3>
-
     <div class="hr"></div>
   </div>
+</div>
+
+<div class="group-topper">
+  <table>
+    {% for user in Users%}
+      <tr>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.readable_role() }}</td>
+
+      </tr>
+    {% endfor %}
+  </table>
 </div>
 
