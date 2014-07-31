@@ -1,107 +1,111 @@
 <div class="row">
-    <div class="col-sm-12">
-        <h3 class="text-left">Settings - {{ current_user.readable_role() }}
-        </h3>
+	<div class="col-sm-12">
+		<h3 class="text-left">Settings - {{ current_user.readable_role() }}
+		</h3>
 
-        <div class="hr"></div>
-    </div>
+		<div class="hr"></div>
+	</div>
 </div>
 
 <div class="row">
-    <div class="col-sm-12">
-        <div class="group-topper">
-            <form action="{{ url_for('dashboard.dash') + "#settings"}}" method="POST">
-                <!-- EMAIL CHANGE -->
-                {{ form.email.label }}
-                <div class="textbox-wrap">
-                    <div class="input-group">
-                            <span class="input-group-addon">
-                              <i class="fa fa-envelope-o"></i>
-                            </span>
-                        {{ form.email(class="form-control",  value=current_user.email, placeholder="email") }}
-                    </div>
-                    <b>Status: <span style="color:
-                            {% if current_user.confirmed %} green"> Confirmed
-                            {% else %} red"> Unconfirmed
-                            {% endif %} </span>
-                    </b>
-                </div>
+	<div class="col-sm-12">
+		<div class="group-topper">
+			<form action="{{ url_for('dashboard.dash') + "#settings"}}" method="POST" class="settings-form">
+				<!-- EMAIL CHANGE -->
+				<div class="textbox-wrap">
+          <div class="row">
+            <div class="col-sm-5">
+              {{ form.email.label }}
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-envelope-o"></i>
+                </span>
+                {{ form.email(class="form-control",  value=current_user.email, placeholder="email") }}
+              </div>
+            </div>
+            <div class="col-sm-5 text-left">
+              <b>Status: <span style="line-height:2.5; color:
+                {% if current_user.confirmed %} green"> Confirmed
+                {% else %} red"> Unconfirmed
+                {% endif %} </span>
+              </b>
+            </div>
+          </div>
+				</div>
 
-                <hr>
-                <!-- PASSWORD CHANGE -->
-                <div class="textbox-wrap">
-                    {{ form.password.label }}
-                    <div class="input-group">
-                            <span class="input-group-addon">
-                              <i class="fa fa-lock"></i>
-                            </span>
-                        {{ form.password(class="form-control", placeholder="password") }}
-                    </div>
-                </div>
-                <div class="textbox-wrap">
-                    {{ form.password2.label }}
-                    <div class="input-group">
-                            <span class="input-group-addon">
-                              <i class="fa fa-lock"></i>
-                            </span>
-                        {{ form.password2(class="form-control", placeholder="password") }}
-                    </div>
-                </div>
-                <hr>
-                <!-- OPTIONS CHANGE -->
-                <div class="textbox-wrap">
-                    {{ form.receiveMail.label }}
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-share"></i></span>
-                        {{ form.receiveMail(class="form-control")}}
-                    </div>
-                </div>
-                <div class="textbox-wrap">
-                    {{ form.option1.label }}
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-share"></i></span>
-                        {{ form.option1(class="form-control")}}
-                    </div>
-                </div>
-                <div class="textbox-wrap">
-                    {{ form.option2.label }}
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-share"></i></span>
-                        {{ form.option2(class="form-control")}}
-                    </div>
-                </div>
-                <div class="textbox-wrap">
-                    {{ form.option3.label }}
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-share"></i></span>
-                        {{ form.option3(class="form-control")}}
-                    </div>
-                </div>
+				<hr>
+				<!-- PASSWORD CHANGE -->
+				<div class="textbox-wrap">
+					{{ form.password.label }}
+					<div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-lock"></i>
+            </span>
+						{{ form.password(class="form-control", placeholder="password") }}
+					</div>
+				</div>
+				<div class="textbox-wrap">
+					{{ form.password2.label }}
+					<div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-lock"></i>
+            </span>
+						{{ form.password2(class="form-control", placeholder="password") }}
+					</div>
+				</div>
+				<hr>
+				<!-- OPTIONS CHANGE -->
+				<div class="textbox-wrap">
+					{{ form.receiveMail.label }}
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-share"></i></span>
+						{{ form.receiveMail(class="form-control")}}
+					</div>
+				</div>
+				<div class="textbox-wrap">
+					{{ form.option1.label }}
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-share"></i></span>
+						{{ form.option1(class="form-control")}}
+					</div>
+				</div>
+				<div class="textbox-wrap">
+					{{ form.option2.label }}
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-share"></i></span>
+						{{ form.option2(class="form-control")}}
+					</div>
+				</div>
+				<div class="textbox-wrap">
+					{{ form.option3.label }}
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-share"></i></span>
+						{{ form.option3(class="form-control")}}
+					</div>
+				</div>
 
-                {% block dash_settings %}
-                {% endblock %}
+				{% block dash_settings %}
+				{% endblock %}
 
-                <hr>
-                {{ form.csrf_token }}
-                <!-- CONFIRMATION AND BUTTONS -->
-                <div class="form-action clearfix">
-                    <div class="textbox-wrap">
-                        {{ form.passwordConfirm.label }}
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-share"></i></span>
-                            {{ form.passwordConfirm(class="form-control")}}
-                        </div>
-                    </div>
+				<hr>
+				{{ form.csrf_token }}
+				<!-- CONFIRMATION AND BUTTONS -->
+				  <div class="textbox-wrap">
+					  {{ form.passwordConfirm.label }}
+					  <div class="input-group">
+						  <span class="input-group-addon"><i class="fa fa-share"></i></span>
+						  {{ form.passwordConfirm(class="form-control")}}
+					  </div>
+				  </div>
 
-                    <button type="submit" class="btn btn-success pull-center custom-button green-btn">
-                        Update &nbsp;<i class="fa fa-save"></i>
-                    </button>
-                    <a href="{{ url_for('auth.delete_account') }}"><button onclick="return confirm('Are you sure you want to delete your account?');" type="button" value="delete-account" name=delete-account" id="delete-account"
-                            class="btn pull-center custom-button red-btn">
-                        Delete account &nbsp;<i class="fa fa-times"></i>
-                    </button></a>
-                </div>
-            </form>
-        </div>
-    </div>
+				  <button type="submit" class="btn btn-success pull-center custom-button green-btn">
+					  Update &nbsp;<i class="fa fa-save"></i>
+				  </button>
+				  <a href="{{ url_for('auth.delete_account') }}"><button onclick="return confirm('Are you sure you want to delete your account?');" type="button" value="delete-account" name=delete-account" id="delete-account"
+						  class="btn pull-center custom-button red-btn">
+					  Delete account &nbsp;<i class="fa fa-times"></i>
+				  </button></a>
+			</form>
+		</div>
+	</div>
 </div>
