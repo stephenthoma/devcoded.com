@@ -136,12 +136,17 @@ body {
   box-shadow: none;
 }
 
+
 .checkbox .input-group{
+    vertical-align: middle;
+    padding-top: 4px;
+    padding-bottom: 2px;
     border: none;
 }
 
 .checkbox .input-group input[type=checkbox]{
     /* TEXTBOX STUFF */
+    height: 20px;
 }
 
 #confirm-pwd {
