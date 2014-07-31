@@ -7,11 +7,15 @@ from ..models import User, Role
 from .forms import SettingsForm
 
 @dashboard.route('/', defaults={'path': ''}, methods=['GET', 'POST'])
-@dashboard.route('/<path:path>')
+@dashboard.route('/<path:path>', methods=['GET', 'POST'])
 @login_required
 def dash(path):
     form = SettingsForm()
     if form.validate_on_submit():
-        flash('submitted')
+      if not current_user.verify_password(form.passwordConfirm):
+        #entered wrong password
+        flash("Wrong confirmation password")
 
+      flash('submitted')
+    flash("test")
     return render_template("dashboard/dashboard_" + current_user.readable_role() + ".html", form=form)

@@ -4,6 +4,16 @@
     </h3>
 
     <div class="hr"></div>
+    <!-- Display flash messages directly under the settings HR -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="animated bounceInLeft form-error-box" data-animation="bounceInLeft">
+          {% for message in messages %}
+            <span>{{ message }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
   </div>
 </div>
 
