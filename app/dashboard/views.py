@@ -17,5 +17,4 @@ def dash(path):
         flash("Wrong confirmation password")
 
       flash('submitted')
-    flash("test")
     return render_template("dashboard/dashboard_" + current_user.readable_role() + ".html", form=form)

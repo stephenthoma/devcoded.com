@@ -22,9 +22,7 @@ class SettingsForm(Form):
     option3 = BooleanField('Option 3')
 
     passwordConfirm = PasswordField('Password confirmation', validators=[DataRequired()])
-
-    update = SubmitField('Update')
-    delete = SubmitField('Delete account')
+    submit = SubmitField('Update')
 
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():
