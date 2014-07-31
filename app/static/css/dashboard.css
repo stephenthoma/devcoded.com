@@ -5,10 +5,10 @@ body {
 #page-wrapper {
   padding: 0 15px;
   min-height: 568px;
-  background-color:#fff;
+  background-color: #fff;
 }
 
-@media(min-width:768px) {
+@media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
     padding: 0 30px 30px 30px;
@@ -26,6 +26,7 @@ body {
   height: 75px;
   background-color: #f8f8f8 !important;
 }
+
 .navbar li {
   margin-top: 10px;
 }
@@ -35,23 +36,27 @@ body {
   padding-right: 0px;
   padding-left: 0px;
 }
+
 .sidebar ul li {
   border-bottom: 1px solid #e7e7e7;
 }
+
 .sidebar ul li a {
   font-size: medium;
   text-align: left;
   margin-left: 20px;
 }
+
 .sidebar ul li a.active {
   background-color: #eee;
 }
+
 .sidebar ul li i {
   padding-right: 5px;
   padding-bottom: 2px;
 }
 
-@media(min-width:768px) {
+@media (min-width: 768px) {
   .sidebar {
     z-index: 1;
     position: absolute;
@@ -64,6 +69,7 @@ body {
 .content button {
   margin-bottom: 10px;
 }
+
 .content button a {
   color: #fff !important;
 }
@@ -74,11 +80,13 @@ body {
   border-bottom: 0;
   margin-right: 1px;
 }
+
 .content .table-topper h4 {
   margin-bottom: 0px;
   padding-bottom: 5px;
   padding-left: 12px;
 }
+
 .content .table-striped {
   border: 1px solid #e7e7e7;
 }
@@ -88,11 +96,13 @@ body {
   background-color: #f9f9f9;
   border: 1px solid #e7e7e7;
 }
+
 .content .group-topper {
   border: 1px solid #e7e7e7;
   border-radius: 2px 2px 0 0;
   border-bottom: 0;
 }
+
 .content .group-topper h4 {
   margin-bottom: 0px;
   padding-bottom: 5px;
@@ -104,6 +114,7 @@ body {
 .cbp_tmtimeline.cbp_tmmiddle > li {
   margin-top: -50px;
 }
+
 .cbp_tmtimeline.cbp_tmmiddle > li:first-child {
   margin-top: inherit;
 }
@@ -123,9 +134,11 @@ body {
   font-weight: 500;
   color: rgb(100, 100, 100);
 }
+
 .settings-form .textbox-wrap {
   border-left: none;
 }
+
 .settings-form .textbox-wrap.focused {
   border-left: none;
   background-color: #fff;
@@ -136,22 +149,32 @@ body {
   box-shadow: none;
 }
 
+#activation-resend i{
+  margin-right: 5px;
+}
+
 .checkbox .row {
-    margin-left: -20px;
+  margin-left: -20px;
 }
 
-
-.checkbox .input-group{
-    padding-top: 4px;
-    padding-bottom: 2px;
-    border: none;
+.checkbox .input-group {
+  padding-top: 4px;
+  padding-bottom: 2px;
+  border: none;
 }
 
-.checkbox .input-group input[type=checkbox]{
-    /* TEXTBOX STUFF */
-    height: 20px;
+.checkbox .input-group input[type=checkbox] {
+  /* TEXTBOX STUFF */
+  height: 20px;
 }
 
 #confirm-pwd {
+  margin-left: 25%;
+  margin-right: 25%;
+  width: 50%;
+  border: 1px solid #e0e0e0;
+}
 
+.form-action button {
+  margin-right: 10px;
 }
