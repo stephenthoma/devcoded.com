@@ -16,6 +16,8 @@ body {
   }
 }
 
+/* ---- SECTION: NAVBAR ---- */
+
 .navbar {
   border-bottom: 1px solid #e7e7e7 !important;
   -webkit-box-shadow: none !important;
@@ -28,6 +30,7 @@ body {
   margin-top: 10px;
 }
 
+/* ---- SECTION: SIDEBAR ---- */
 .sidebar {
   padding-right: 0px;
   padding-left: 0px;
@@ -55,6 +58,8 @@ body {
     margin-top: 51px;
   }
 }
+
+/* ---- SECTION: CONTENT ---- */
 
 .content button {
   margin-bottom: 10px;
@@ -94,6 +99,8 @@ body {
   padding-left: 12px;
 }
 
+/* ---- SECTION: TIMELINE ---- */
+
 .cbp_tmtimeline.cbp_tmmiddle > li {
   margin-top: -50px;
 }
@@ -106,7 +113,25 @@ body {
   color: #f9f9f9;
 }
 
-.dash-content {
-
+/* ---- FORM: SETTINGS ---- */
+.settings-form label {
+  width: 200px;
+  margin-right: 16px;
+  line-height: 35px;
+  margin-bottom: 0;
+  text-align: left;
+  font-weight: 500;
+  color: rgba(200, 200, 200, 1.0);
 }
-
+.settings-form .textbox-wrap {
+  border-left: none;
+}
+.settings-form .textbox-wrap.focused {
+  border-left: none;
+  background-color: #fff;
+  -o-box-shadow: none;
+  -ms-box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
