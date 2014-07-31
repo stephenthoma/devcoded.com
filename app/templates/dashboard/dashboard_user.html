@@ -1,16 +1,16 @@
 {% extends "dashboard/dashboard_base.html" %}
 
 {% block styles %}
-{{ super() }}
-<link href="{{ url_for('static', filename='css/lib/timeline.css') }}" rel="stylesheet">
+  {{ super() }}
+  <link href="{{ url_for('static', filename='css/lib/timeline.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block dash_content %}
-{{ super() }}
-    <span id="home" class="dash-content">
+  {{ super() }}
+  <span id="home" class="dash-content">
         {% include "dashboard/home/" + current_user.readable_role() + "_home.html" ignore missing %}
     </span>
-    <span id="settings" class="dash-content">
+  <span id="settings" class="dash-content">
         {% include "dashboard/settings/" + current_user.readable_role() + "_settings.html" ignore missing %}
     </span>
 {% endblock %}
