@@ -149,6 +149,10 @@ body {
   box-shadow: none;
 }
 
+#activation-resend {
+  background-color: gainsboro;
+}
+
 #activation-resend i{
   margin-right: 5px;
 }

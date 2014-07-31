@@ -29,9 +29,10 @@
                 green"> Confirmed</span>
               {% else %}
                 red"> Unconfirmed</span> &nbsp;
-                <button id="activation-resend" class="btn">
-                  Resend &nbsp; <i class="fa fa-reply"></i>
-                </button>
+                <a href="{{ url_for('auth.resend_confirmation') }}"
+                   id="activation-resend" class="btn custom-button">
+                    Resend &nbsp; <i class="fa fa-reply"></i>
+                </a>
               {% endif %}
               </b>
             </div>
