@@ -15,18 +15,3 @@ def dash(path):
         flash('submitted')
 
     return render_template("dashboard/dashboard_" + current_user.readable_role() + ".html", form=form)
-
-@dashboard.route('/settings', )
-@login_required
-def settings():
-    #TEMPORALY
-    form = SettingsForm()
-    if form.validate_on_submit():
-        flash('submitted')
-
-    return render_template("dashboard/user_settings.html", form=form)
-
-def render(url):
-    if not url.endswith(".html"):
-        url += ".html"
-    return render_template("dashboard/" + url)
