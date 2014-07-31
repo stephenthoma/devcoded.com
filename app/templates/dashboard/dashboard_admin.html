@@ -1,11 +1,13 @@
 {% extends "dashboard/dashboard_developer.html" %}
 
-{% block styles %}
+{% block sidebar_items %}
   {{ super() }}
-  <link href="{{ url_for('static', filename='css/lib/timeline.css') }}" rel="stylesheet">
+  <li><a href="#users" onclick="show('users');"><i class="fa fa-list"></i>Users</a></li>
 {% endblock %}
 
 {% block dash_content %}
   {{ super() }}
-
+  <span id="users" class="dash-content">
+    {% include "dashboard/users.html" ignore missing %}
+  </span>
 {% endblock %}
