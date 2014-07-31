@@ -121,7 +121,7 @@ body {
   margin-bottom: 0;
   text-align: left;
   font-weight: 500;
-  color: rgba(200, 200, 200, 1.0);
+  color: rgb(100, 100, 100);
 }
 .settings-form .textbox-wrap {
   border-left: none;
@@ -134,4 +134,16 @@ body {
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+.checkbox .input-group{
+    border: none;
+}
+
+.checkbox .input-group input[type=checkbox]{
+    /* TEXTBOX STUFF */
+}
+
+#confirm-pwd {
+
 }
