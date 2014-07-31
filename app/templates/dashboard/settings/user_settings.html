@@ -25,11 +25,14 @@
             </div>
             <div class="col-sm-5 text-left">
               <b>Status: <span style="line-height:2.5; color:
-                      {% if current_user.confirmed %} green"> Confirmed</span>
-                      {% else %}
-                        red"> Unconfirmed</span> &nbsp;
-                        <button id="activation-resend" class="btn"><i class="fa fa-reply"></i>Resend</button>
-                      {% endif %} </span>
+              {% if current_user.confirmed %}
+                green"> Confirmed</span>
+              {% else %}
+                red"> Unconfirmed</span> &nbsp;
+                <button id="activation-resend" class="btn">
+                  Resend &nbsp; <i class="fa fa-reply"></i>
+                </button>
+              {% endif %}
               </b>
             </div>
           </div>
@@ -121,11 +124,11 @@
           <button type="submit" class="btn btn-success pull-center custom-button green-btn">
             Update &nbsp;<i class="fa fa-save"></i>
           </button>
-          <a href="{{ url_for('auth.delete_account') }}">
-            <button onclick="return confirm('Are you sure you want to delete your account?');"
-                    class="btn pull-center custom-button red-btn">
+
+          <a href="{{ url_for('auth.delete_account') }}"
+            class="btn pull-center custom-button red-btn"
+            onclick="return confirm('Are you sure you want to delete your account?');">
               Delete account &nbsp;<i class="fa fa-times"></i>
-            </button>
           </a>
         </div>
       </form>

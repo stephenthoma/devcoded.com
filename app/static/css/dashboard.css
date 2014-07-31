@@ -175,6 +175,7 @@ body {
   border: 1px solid #e0e0e0;
 }
 
-.form-action button {
-  margin-right: 10px;
+.form-action .btn {
+  margin-right: 5px;
+  vertical-align: inherit;
 }
