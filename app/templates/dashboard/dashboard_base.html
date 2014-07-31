@@ -37,6 +37,15 @@
       </ul>
     </div>
     <div id="page-wrapper" class="col-sm-10 col-sm-offset-2 content">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="animated bounceInLeft form-error-box" data-animation="bounceInLeft">
+            {% for message in messages %}
+              <span>{{ message }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
       {% block dash_content %}
 
       {% endblock %}
