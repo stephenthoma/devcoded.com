@@ -254,6 +254,7 @@ footer span {
   position: fixed;
   left: 0px;
   z-index: -2;
+  width: 100%;
 
   -webkit-user-select:none;
    -khtml-user-select:none;
