@@ -153,3 +153,11 @@ class PluginEvent(db.Model):
     action = db.Column(db.Text())
     result = db.Column(db.Text())
 
+class Order(db.Model):
+    __tablename__ = 'orders'
+    id = db.Column(db.Integer, primary_key=True)
+    plugin_id = db.Column(db.Integer, db.ForeignKey('plugins.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    paid = db.Column(db.Boolean, default=False)
+    price = db.Column(db.Integer)
+
