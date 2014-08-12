@@ -14,6 +14,8 @@ class Config:
     MAIL_SUBJECT_PREFIX = '[DevCoded_]'
     MAIL_SENDER = 'DevCoded Admin <admin@devcoded.com>'
     DEVCODED_ADMIN = 'admin@devcoded.com'
+    BALANCED_MARKETPLACE_URI = os.environ.get('BALANCED_MARKETPLACE_URI')
+    BALANCED_API_KEY = os.environ.get('BALANCED_API_KEY')
 
     @staticmethod
     def init_app(app):

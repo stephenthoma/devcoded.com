@@ -5,6 +5,7 @@ from flask.ext.mail import Mail
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from config import config
+import balanced
 
 
 bootstrap = Bootstrap()
@@ -24,6 +25,7 @@ def create_app(config_name):
     mail.init_app(app)
     db.init_app(app)
     login_manager.init_app(app)
+    balanced.configure(app.config['BALANCED_API_KEY'])
 
     if not app.debug and not app.testing and not app.config['SSL_DISABLE']:
         from flask.ext.sslify import SSLify
