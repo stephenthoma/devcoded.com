@@ -1,11 +1,76 @@
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, redirect, request, url_for, flash, abort
 from flask.ext.login import login_user, logout_user, login_required, current_user
+import balanced
 from . import auth
 from .. import db
-from ..models import User
+from ..models import User, Plugin, Order
 from ..email import send_email
 from .forms import LoginForm, RegistrationForm, ChangePasswordForm, \
                    PasswordResetRequestForm, PasswordResetForm, ChangeEmailForm
+
+class PaymentManager(object):
+    def __init__(self, request):
+        super(PaymentManager, self).__init__()
+        self.request = request
+
+    def pay(self, order, card_uri):
+        db.session.flush()
+        user = current_user
+
+        if not user.account_uri:
+            self.create_balanced_account(user, card_uri)
+        else:
+            if card_uri:
+                user.add_card(card_uri)
+        db.session.flush()
+        return order.debit(user, card_uri)
+
+    def create_balanced_account(self, user, card_uri):
+        try:
+            user.create_balanced_account(card_uri=card_uri)
+        except balanced.exc.HTTPError as ex:
+            if (ex.status_code == 409 and
+            'email_address' in ex.description):
+                user.associate_balanced_account()
+            else:
+                raise ex
+
+@auth.route('/pay/<int:order_id>', methods=['GET', 'POST'])
+@login_required
+def pay(order_id):
+    order = Order.query.get_or_404(order_id)
+    if not current_user.id == order.user_id:
+        abort(504)
+    elif order.paid == True:
+        return redirect(url_for('auth.receipt', order_id=order_id))
+
+    if request.method == 'POST':
+        manager = PaymentManager(request)
+        card_uri = request.form.get('card_uri', None)
+        try:
+            manager.pay(order, card_uri)
+        except balanced.exc.HTTPError as ex:
+            msg = 'Error debiting account, your card has not been charged "{}"'
+            flash(msg.format(ex.message), 'error')
+            db.session.rollback()
+        except Exception as ex:
+            raise
+        else:
+            db.session.commit()
+            return redirect(url_for('auth.receipt', order_id=order_id))
+    return render_template('auth/pay.html', order=order)
+
+@auth.route('/receipt/<int:order_id>')
+@login_required
+def receipt(order_id):
+    order = Order.query.get_or_404(order_id)
+    plugin = Plugin.query.get_or_404(order.plugin_id)
+    if not current_user.id == order.user_id:
+        abort(504)
+    elif not order.paid:
+        abort(404)
+
+    return render_template('auth/receipt.html', plugin=plugin, order=order)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
