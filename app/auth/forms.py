@@ -4,6 +4,9 @@ from wtforms_html5 import EmailField
 from wtforms.validators import DataRequired, Length, Email, Regexp, EqualTo
 from ..models import User
 
+class PaymentForm(Form):
+    card_uri = StringField('Card URI', validators=[DataRequired()])
+
 class LoginForm(Form):
     email = EmailField('Email', validators=[DataRequired(), Length(1, 64),
                                              Email()])

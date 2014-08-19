@@ -16,7 +16,7 @@
       {% endif %}
     {% endwith %}
     <div class="form-content">
-      <form action="" id="purchase" method="POST">
+      <form action="{{ url_for('auth.pay', order_id=order.id) }}" id="purchase" method="POST">
         <div class="section-title">
           <h3 class="blue-text">Payment</h3>
         </div>
@@ -95,12 +95,26 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/payment.js') }}"></script>
 
 <script type="text/javascript">
-  var csrf = 'test';
+  $(".cc-em").bind("input", function() {
+      var $this = $(this);
+      setTimeout(function() {
+          if ( $this.val().length >= parseInt($this.attr("maxlength"),10) )
+              $this.parents(':eq(1)').find('.cc-ey').focus();
+      },0);
+  });
+
+  <!--$('.cc-number').keyup(function() {-->
+    <!--var foo = $(this).val().split("-").join(""); // remove hyphens-->
+    <!--if (foo.length > 0) {-->
+      <!--foo = foo.match(new RegExp('.{1,4}', 'g')).join("-");-->
+    <!--}-->
+    <!--$(this).val(foo);-->
+  <!--});-->
+
   var marketplaceUri = '{{ config['BALANCED_MARKETPLACE_URI'] }}';
 
   $(function () {
     devcoded.init({
-      csrfToken:csrf,
       marketplaceUri:marketplaceUri
     });
   });

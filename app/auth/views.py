@@ -5,7 +5,7 @@ from . import auth
 from .. import db
 from ..models import User, Plugin, Order
 from ..email import send_email
-from .forms import LoginForm, RegistrationForm, ChangePasswordForm, \
+from .forms import PaymentForm, LoginForm, RegistrationForm, ChangePasswordForm, \
                    PasswordResetRequestForm, PasswordResetForm, ChangeEmailForm
 
 class PaymentManager(object):
@@ -38,13 +38,14 @@ class PaymentManager(object):
 @auth.route('/pay/<int:order_id>', methods=['GET', 'POST'])
 @login_required
 def pay(order_id):
+    form = PaymentForm()
     order = Order.query.get_or_404(order_id)
     if not current_user.id == order.user_id:
         abort(504)
     elif order.paid == True:
         return redirect(url_for('auth.receipt', order_id=order_id))
 
-    if request.method == 'POST':
+    if form.validate_on_submit():
         manager = PaymentManager(request)
         card_uri = request.form.get('card_uri', None)
         try:
@@ -58,7 +59,7 @@ def pay(order_id):
         else:
             db.session.commit()
             return redirect(url_for('auth.receipt', order_id=order_id))
-    return render_template('auth/pay.html', order=order)
+    return render_template('auth/pay.html', form=form, order=order)
 
 @auth.route('/receipt/<int:order_id>')
 @login_required
