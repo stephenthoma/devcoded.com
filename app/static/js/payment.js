@@ -70,22 +70,20 @@
     };
     var completePurchase = function (response) {
         var $form = $('form#purchase');
-        var sensitiveFields = ['number', 'name', 'expiration_month', 'expiration_year'];
+        var sensitiveFields = ['number', 'name', 'cvv', 'expiration_month', 'expiration_year'];
 
         hideProcessing();
-        console.log(response);
         switch (response.status_code) {
             case 201:
                 showProcessing('Making payment...', 66);
                 //  IMPORTANT - remove sensitive data to remain PCI compliant
                 removeSensitiveFields($form, sensitiveFields);
                 $form.find('input').removeAttr('disabled');
-                console.log(response.cards[0].href)
                 $('<input type="hidden" name="card_uri" value="' + response.cards[0].href + '">').appendTo($form);
                 $form.unbind('submit', submitPurchase).submit();
                 break;
             case 400:
-                var fields = ['name', 'number', 'expiration_month', 'expiration_year', ''];
+                var fields = ['number', 'name', 'cvv', 'expiration_month', 'expiration_year', ''];
                 var found = false;
                 for (var i = 0; i < fields.length; i++) {
                     var isIn = response.error.description.indexOf(fields[i]) >= 0;
@@ -106,7 +104,7 @@
                 showError('We couldn\'t authorize this card, please check your card details and try again');
                 break;
             case 404:
-                console.warn('your marketplace URI is incorrect');
+                console.warn('Incorrect marketplace URI.');
                 break;
             case 500:
                 console.error('Balanced did something bad, this will never happen, but if it does please retry the request');
@@ -115,28 +113,11 @@
                 break;
         }
     };
-    var showProcessing = function (message, progress) {
-        progress = progress || 50;
-        var $loader = $('.loading');
-        if (!$loader.length) {
-            $loader = $(
-                '<div class="loading">' +
-                    '<div class="progress progress-striped active">' +
-                    '<div class="bar"></div>' +
-                    '</div>' +
-                    '<p>&nbsp;</p>' +
-                    '</div>');
-            $loader.appendTo('body');
-        }
-        $loader.find('.bar').css({width:progress + '%'});
-        $loader.find('p').text(message);
-        $loader.css({
-            left:$('body').width() / 2 - $loader.width() / 4,
-            top:'400px'
-        }).show();
+    var showProcessing = function () {
+        $('#pay-submit').addClass('loading');
     };
     var hideProcessing = function () {
-        $('.loading').hide();
+        $('#pay-submit').removeClass('loading');
     };
     var showError = function (message) {
         var $alert = $('.alert:visible');

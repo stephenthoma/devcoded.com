@@ -65,9 +65,10 @@
             </div>
           </div>
         </div>
+        {{ form.csrf_token }}
         <div class="form-action clearfix">
           <p class="pull-left">Price: <span class="red-text">{{ order.readable_price() }}</span></p>
-          <button type="submit" class="btn btn-success pull-right custom-button">
+          <button id="pay-submit" type="submit" class="btn btn-success pull-right custom-button">
             Pay now &nbsp;<i class="fa fa-chevron-circle-right"></i>
           </button>
         </div>
