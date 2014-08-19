@@ -1,0 +1,124 @@
+{%extends "base.html" %}
+{$ import "bootstrap/wtf.html" as wtf %}
+
+{% block body_attribs %} style="background-color: rgba(64,64,64,1);" {% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="pay-form-section">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="animated bounceInLeft form-error-box" data-animation="bounceInLeft">
+        {% for message in messages %}
+          <span>{{ message }}</span>
+        {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <div class="form-content">
+      <form action="{{ url_for('auth.pay', order_id=order.id) }}" id="purchase" method="POST">
+        <div class="section-title">
+          <h3 class="blue-text">Payment</h3>
+        </div>
+        <div class="textbox-wrap">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-lock"></i>
+            </span>
+            <input type="text" autocomplete="off" name="number" placeholder="Card Number" pattern="[0-9]{13,16}" class="form-control cc-number">
+          </div>
+        </div>
+        <div class="textbox-wrap">
+          <div class="row">
+            <div class="col-sm-7">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-user"></i>
+                </span>
+                <input type="text" autocomplete="off" name="name" placeholder="Name on card" class="form-control">
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="input-group">
+                <span class="input-group-addon" style="padding-right:5px;">
+                  <i class="fa fa-lock"></i>
+                </span>
+                <input type="text" autocomplete="off" name="cvv" placeholder="CVV" maxlength="4" pattern="[0-9]{3,4}" class="form-control cc-csc">
+              </div>
+            </div>
+            <div class="col-sm-1 cc-question">
+              <i id="cvv-help" class="fa fa-question-circle"></i>
+            </div>
+          </div>
+        </div>
+        <div class="textbox-wrap expiration">
+          <div class="input-group col-sm-6">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <div class="col-sm-3">
+              <input type="text" autocomplete="off" name="expiration_month" placeholder="MM" maxlength=2 pattern="[0-9]{2}" class="form-control cc-em">
+            </div>
+            <div class="col-sm-6">
+              <input type="text" autocomplete="off" name="expiration_year" placeholder="YYYY" maxlength=4 pattern="[0-9]{4}" class="form-control cc-ey">
+            </div>
+          </div>
+        </div>
+        {{ form.csrf_token }}
+        <div class="form-action clearfix">
+          <p class="pull-left">Price: <span class="red-text">{{ order.readable_price() }}</span></p>
+          <button id="pay-submit" type="submit" class="btn btn-success pull-right custom-button">
+            Pay now &nbsp;<i class="fa fa-chevron-circle-right"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="after-form-box">
+      <div class="row">
+        <div class="col-md-4">
+         <img class="secure-logo" src="{{ url_for('static', filename='img/balanced.png') }}"></img>
+        </div>
+        <div class="col-md-8 text-left">
+          <p>This transaction is secured with bank-grade encryption via Balanced Payments.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+
+<script type="text/javascript" src="https://js.balancedpayments.com/1.1/balanced.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/payment.js') }}"></script>
+
+<script type="text/javascript">
+  $(".cc-em").bind("input", function() {
+      var $this = $(this);
+      setTimeout(function() {
+          if ( $this.val().length >= parseInt($this.attr("maxlength"),10) )
+              $this.parents(':eq(1)').find('.cc-ey').focus();
+      },0);
+  });
+
+  <!--$('.cc-number').keyup(function() {-->
+    <!--var foo = $(this).val().split("-").join(""); // remove hyphens-->
+    <!--if (foo.length > 0) {-->
+      <!--foo = foo.match(new RegExp('.{1,4}', 'g')).join("-");-->
+    <!--}-->
+    <!--$(this).val(foo);-->
+  <!--});-->
+
+  var marketplaceUri = '{{ config['BALANCED_MARKETPLACE_URI'] }}';
+
+  $(function () {
+    devcoded.init({
+      marketplaceUri:marketplaceUri
+    });
+  });
+
+</script>
+{% endblock %}
