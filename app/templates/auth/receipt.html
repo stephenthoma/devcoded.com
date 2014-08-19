@@ -26,11 +26,9 @@
     </div>
     <div class="hr"></div>
     <div class="row receipt-footer">
-        <div class="col-sm-offset-8 col-sm-4">
-           <span>Subtotal: {{ '$' + (order.price / 1000)|round(2)|string }}</span>
-           <span>Fees: {{ '$' + ((order.price * 0.029 + 30) / 1000)|round(2)|string }}</span>
-           <span>Total: {{ '$' + ((order.price + (order.price * 0.029 + 30)) / 1000)|round(2)|string }}</span>
-          <span>Paid: {{ '$' + ((order.price + (order.price * 0.029 + 30)) / 1000)|round(2)|string }}</span>
+        <div class="col-sm-offset-8 col-sm-4" style="padding-right:48px;">
+           <span>Subtotal: {{ order.readable_price() }}</span>
+          <span>Paid: {{ order.readable_price() }}</span>
           <span>Due: $0.00</span>
         </div>
   </div>
