@@ -266,6 +266,7 @@ class Order(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     paid = db.Column(db.Boolean, default=False)
     price = db.Column(db.Integer)
+    href = db.Column(db.Unicode)
 
     def debit(self, user, card_uri=None):
         account = User.balanced_account
@@ -278,10 +279,14 @@ class Order(db.Model):
         # this will throw balanced.exc.HTTPError if it fails
         try:
             card = balanced.Card.fetch(card_uri)
-            debit = card.hold(amount = float(self.price) / 1000, description='Hold for order #{0} of plugin {1}'.format(self.id, self.plugin_id))
+            debit = card.debit(
+                    appears_on_statement_as = 'DevCoded LLC. order #{0}'.format(self.id),
+                    amount = self.price / 100,
+                    description='Hold for order #{0} of plugin {1}'.format(self.id, self.plugin_id))
         except balanced.exc.HTTPError as ex:
             raise ex
         else:
+            self.href = debit.href
             self.paid = True
 
     def readable_price(self):
