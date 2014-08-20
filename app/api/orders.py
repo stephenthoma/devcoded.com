@@ -1,6 +1,7 @@
 from flask import jsonify, request, current_app, url_for
 from . import api
 from .helpers import respond
+from .decorators import permission_required
 from ..models import User, Plugin, Order, Role
 
 @api.route('/orders/')

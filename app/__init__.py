@@ -10,7 +10,6 @@ from config import config
 import balanced
 
 
-toolbar = DebugToolbarExtension()
 bootstrap = Bootstrap()
 mail = Mail()
 db = SQLAlchemy()
@@ -25,13 +24,13 @@ def create_app(config_name):
     app.config.from_object(config[config_name])
     config[config_name].init_app(app)
 
+    toolbar = DebugToolbarExtension(app)
     toolbar.init_app(app)
     bootstrap.init_app(app)
     mail.init_app(app)
     db.init_app(app)
     login_manager.init_app(app)
     balanced.configure(app.config['BALANCED_API_KEY'])
-    toolbar = DebugToolbarExtension(app)
     configure_uploads(app, upload)
 
     if not app.debug and not app.testing and not app.config['SSL_DISABLE']:
