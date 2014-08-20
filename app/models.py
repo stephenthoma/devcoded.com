@@ -398,3 +398,13 @@ class Order(db.Model):
             return '$0.00'
         else:
             return '$' + '{:.2f}'.format(float(self.price) / 1000)
+
+    def to_json(self):
+        order = {
+                 'plugin': self.plugin_id,
+                 'customer': self.user_id,
+                 'paid': self.paid,
+                 'price': self.price,
+                 'balanced_uri': self.href
+                 }
+        return order

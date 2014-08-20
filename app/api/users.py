@@ -1,7 +1,7 @@
 from flask import jsonify, request, current_app, url_for
 from . import api
 from .helpers import respond
-from ..models import User, Plugin
+from ..models import User, Plugin, Order
 
 @api.route('/users/<int:id>')
 def get_user(id):
@@ -16,6 +16,11 @@ def get_user_plugins(id):
     for p in plugins:
         x.append(p.id)
     return jsonify(respond(200, {'plugin_ids': x}))
+
+@api.route('/users/<int:id>/orders/')
+def get_user_orders(id):
+    user = User.query.get_or_404(id)
+    orders = Order.query.filter_by(user_id=user.id).all()
 
 @api.route('/users/search/<username>')
 def get_user_id(username):

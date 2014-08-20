@@ -1,4 +1,5 @@
 from flask import jsonify, request, current_app, url_for
+from flask.ext.login import current_user
 from flask.ext.uploads import UploadNotAllowed
 from .. import db
 from . import api
@@ -23,31 +24,36 @@ def get_plugin(id):
 @api.route('/plugins/<int:id>/update/', methods=['POST'])
 @permission_required(Role.DEV)
 def new_plugin_update(id):
-    #[TODO]: Only allow if developer is assigned to plugin.
     plugin = Plugin.query.get_or_404(id)
-    update = PluginUpdate(plugin_id=id, description = request.get_json(force=True)['description'])
-    db.session.add(update)
-    db.session.commit()
-    return jsonify(respond(201, update.to_json()))
+    if plugin.user_id == current_user.id:
+        update = PluginUpdate(plugin_id=id, description = request.get_json(force=True)['description'])
+        db.session.add(update)
+        db.session.commit()
+        return jsonify(respond(201, update.to_json()))
+    else:
+        return jsonify(resond(504))
 
 @api.route('/plugins/<int:id>/upload/', methods=['POST'])
 @permission_required(Role.DEV)
 def new_plugin_file(id):
-    #[TODO]: Only allow if developer is assigned to plugin.
-    try:
-        if 'file' in request.files:
-            file = request.files.get('file')
-            filename = upload.save(file)
-    except UploadNotAllowed as e:
-        return jsonify(respond(403))
+    plugin = Plugin.query.get_or_404(id)
+    if plugin.user_id == current_user.id:
+        try:
+            if 'file' in request.files:
+                file = request.files.get('file')
+                filename = upload.save(file)
+        except UploadNotAllowed as e:
+            return jsonify(respond(403))
+        else:
+            pfile = PluginFile(plugin_id=id, file_url=upload.url(filename))
+            db.session.add(pfile)
+            db.session.commit()
+        return jsonify(respond(201, {'url': upload.url(filename)}))
     else:
-        pfile = PluginFile(plugin_id=id, file_url=upload.url(filename))
-        db.session.add(pfile)
-        db.session.commit()
-    return jsonify(respond(201, {'url': upload.url(filename)}))
+        return jsonify(respond(504))
 
 @api.route('/plugins/<int:id>/delete/', methods=['DELETE'])
-#@permission_required(Role.ADMIN)
+@permission_required(Role.ADMIN)
 def delete_plugin(id):
     plugin = Plugin.query.get_or_404(id)
     db.session.delete(plugin)
