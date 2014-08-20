@@ -1,12 +1,27 @@
 from flask import jsonify, request, current_app, url_for
+from .. import db
 from . import api
 from .helpers import respond
-from ..models import User, Plugin, Order
+from .decorators import permission_required
+from ..models import User, Plugin, Order, Role
 
 @api.route('/users/<int:id>')
 def get_user(id):
     user = User.query.get_or_404(id)
     return jsonify(respond(200, user.to_json()))
+
+@api.route('/users/<int:id>/role', methods=['GET','POST'])
+@permission_required(Role.ADMIN)
+def user_role(id):
+    user = User.query.get_or_404(id)
+    if request.method == 'POST':
+        role = request.get_json()['role']
+        if role in [1,2]:
+            user.role = role
+            db.session.commit
+        else:
+            return jsonify(response(500))
+    return jsonify(response(200, {user.role}))
 
 @api.route('/users/<int:id>/plugins/')
 def get_user_plugins(id):
