@@ -1,0 +1,23 @@
+*********************************
+{{ order.readable_price() }} Paid
+*********************************
+
+------------------------------
+Thanks for using DevCoded LLC.
+------------------------------
+
+{{ user.username }}
+Invoice #{{ order.id }}
+{{ date }}
+
+{{ plugin.name }}
+{{ order.readable_price() }}
+
+Total
+{{ order.readable_price() }}
+
+View in browser ( https://www.devcoded.com/auth/receipt/{{ order.id }} )
+
+DevCoded LLC. Boulder, Co
+
+Questions? Email contact@devcoded.com

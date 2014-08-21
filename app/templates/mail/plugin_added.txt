@@ -1,7 +1,17 @@
-Your plugin is on its way!
-Congratulations on designing your plugin, {{ user.username }}.
+ongratulations! Your plugin is on its way to being
+created.
 
-{{ plugin.name }} has been added to our system and the developers have been notified! We'll email you as soon as a developer has been assigned to your project.
+{{ user.username }}, your plugin, {{ plugin.name }} is pending approval.
 
-Interested in the status of your plugin? Head on over to your dashboard for details.
-{{ url_for('dashboard.dash', _external=True) }}
+An administrator will review your plugin
+shortly and provide you with a quote for the plugin's price. Once
+you have received a price quote, you must pay before development
+can begin. But don't fret! Your money will be held in escrow
+until you receive your plugin and are satisfied with it.
+
+Check plugin status ( https://www.devcoded.com/dashboard )
+
+Thanks for choosing DevCoded LLC.
+
+Unsubscribe ( https://www.devcoded.com/unsubscribe ) from these
+alerts.

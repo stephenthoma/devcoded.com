@@ -1,0 +1,17 @@
+Development on your plugin has begun!
+
+{{ user.username }}, we just wanted to let
+you know that a developer has begun work on your plugin, {{
+plugin.name }}.
+
+Regular updates will be provided on your user
+dashboard with information about how soon your plugin will be
+ready, what the developer is currently working on, and more. You
+can access your dashboard from the below link.
+
+Check plugin status ( https://www.devcoded.com/dashboard )
+
+Thanks for choosing DevCoded LLC.
+
+Unsubscribe ( https://www.devcoded.com/unsubscribe ) from these
+alerts.
