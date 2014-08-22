@@ -1,6 +1,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 import balanced
+from datetime import datetime
 from flask import current_app, request, url_for
 from flask.ext.login import UserMixin, AnonymousUserMixin
 from datetime import datetime
@@ -217,6 +218,28 @@ class User(UserMixin, db.Model):
             merchant_data.pop('state')
         self.balanced_account.add_merchant(merchant_data)
 
+    def to_json(self):
+        json_user = {
+                'username': self.username,
+                'email': self.email,
+                'role': self.role,
+                'confirmed': self.confirmed
+        }
+        return json_user
+
+    def generate_auth_token(self, expiration):
+        s = Serializer(current_app.config['SECRET_KEY'], expires_in=expiration)
+        return s.dumps({'meta':{ 'code': 200}, 'data':{ 'id': self.id}}).decode('ascii')
+
+    @staticmethod
+    def verify_auth_token(token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data = s.loads(token)
+        except:
+            return None
+        return User.query.get(data['id'])
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -225,12 +248,34 @@ class Plugin(db.Model):
     __tablename__ = 'plugins'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    developer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     name = db.Column(db.String(64))
     description = db.Column(db.Text)
     commands = db.relationship('PluginCommand')
     permissions = db.relationship('PluginPermission')
     configs = db.relationship('PluginConfig')
     events = db.relationship('PluginEvent')
+    updates = db.relationship('PluginUpdate')
+    files = db.relationship('PluginFile')
+
+    def _to_json_helper(self, object):
+        x = list()
+        for i in object: x.append(i.to_json())
+        return x
+
+    def to_json(self):
+        json_plugin = {
+                'name': self.name,
+                'creator': self.user_id,
+                'description': self.description,
+                'commands': self._to_json_helper(self.commands),
+                'permissions': self._to_json_helper(self.permissions),
+                'configs': self._to_json_helper(self.configs),
+                'events': self._to_json_helper(self.events),
+                'updates': self._to_json_helper(self.updates),
+                'files': self._to_json_helper(self.files)
+        }
+        return json_plugin
 
 class PluginConfig(db.Model):
     __tablename__ = 'plugin_configs'
@@ -240,12 +285,27 @@ class PluginConfig(db.Model):
     value = db.Column(db.String(64))
     description = db.Column(db.Text())
 
+    def to_json(self):
+        config = {
+                'name': self.name,
+                'value': self.value,
+                'description': self.description
+        }
+        return config
+
 class PluginPermission(db.Model):
     __tablename__ = 'plugin_perms'
     id = db.Column(db.Integer, primary_key=True)
     plugin_id = db.Column(db.Integer, db.ForeignKey('plugins.id'))
     node = db.Column(db.String(64))
     description = db.Column(db.Text())
+
+    def to_json(self):
+        permission = {
+                'node': self.node,
+                'description': self.description
+        }
+        return permission
 
 class PluginCommand(db.Model):
     __tablename__ = 'plugin_commands'
@@ -255,12 +315,53 @@ class PluginCommand(db.Model):
     node = db.Column(db.String(64))
     description = db.Column(db.Text())
 
+    def to_json(self):
+        command = {
+                'command': self.command,
+                'node': self.node,
+                'description': self.description
+        }
+        return command
+
 class PluginEvent(db.Model):
     __tablename__ = 'plugin_events'
     id = db.Column(db.Integer, primary_key=True)
     plugin_id = db.Column(db.Integer, db.ForeignKey('plugins.id'))
     action = db.Column(db.Text())
     result = db.Column(db.Text())
+
+    def to_json(self):
+        event = {
+                'action': self.action,
+                'result': self.result
+        }
+        return event
+
+class PluginUpdate(db.Model):
+    __tablename__ = 'plugin_updates'
+    id = db.Column(db.Integer, primary_key=True)
+    plugin_id = db.Column(db.Integer, db.ForeignKey('plugins.id'))
+    created = db.Column(db.DateTime, default=datetime.now())
+    description = db.Column(db.Text())
+
+    def to_json(self):
+        update = {
+                'created': self.created,
+                'description': self.description
+        }
+        return update
+
+class PluginFile(db.Model):
+    __tablename__ = 'plugin_files'
+    id = db.Column(db.Integer, primary_key=True)
+    plugin_id = db.Column(db.Integer, db.ForeignKey('plugins.id'))
+    file_url = db.Column(db.String(128))
+
+    def to_json(self):
+        file = {
+                'url': self.file_url
+        }
+        return file
 
 class Order(db.Model):
     __tablename__ = 'orders'
@@ -298,3 +399,12 @@ class Order(db.Model):
         else:
             return '$' + '{:.2f}'.format(float(self.price) / 1000)
 
+    def to_json(self):
+        order = {
+                 'plugin': self.plugin_id,
+                 'customer': self.user_id,
+                 'paid': self.paid,
+                 'price': self.price,
+                 'balanced_uri': self.href
+                 }
+        return order

@@ -6,6 +6,8 @@ class Config:
     SSL_DISABLE = False
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_RECORD_QUERIES = True
+    UPLOADED_FILES_DEST = 'app/static/uploads'
+    UPLOADED_FILES_URL = '/static/uploads/'
     MAIL_SERVER = 'mail.gandi.net'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
