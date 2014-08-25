@@ -36,6 +36,10 @@ def get_user_plugins(id):
 def get_user_orders(id):
     user = User.query.get_or_404(id)
     orders = Order.query.filter_by(user_id=user.id).all()
+    x = list()
+    for o in orders:
+        x.append(o.id)
+    return jsonify(respond(200, {'order_ids': x}))
 
 @api.route('/users/search/<username>')
 def get_user_id(username):
