@@ -109,6 +109,10 @@ body {
   padding-left: 12px;
 }
 
+#plugin-detail {
+  margin-top: 25px;
+}
+
 /* ---- SECTION: TIMELINE ---- */
 
 .cbp_tmtimeline.cbp_tmmiddle > li {
