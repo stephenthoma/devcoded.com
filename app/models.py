@@ -273,7 +273,7 @@ class Plugin(db.Model):
     def to_json(self):
         json_plugin = {
                 'name': self.name,
-                'creator': self.user_id,
+                'developer': self.user_id,
                 'description': self.description,
                 'commands': self._to_json_helper(self.commands),
                 'permissions': self._to_json_helper(self.permissions),
@@ -408,7 +408,8 @@ class Order(db.Model):
 
     def to_json(self):
         order = {
-                 'plugin': self.plugin_id,
+                 'id': self.id,
+                 'plugin_id': self.plugin_id,
                  'customer': self.user_id,
                  'paid': self.paid,
                  'price': self.price,
