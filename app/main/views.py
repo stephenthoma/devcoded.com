@@ -5,8 +5,15 @@ from . import main
 from .forms import RequestPluginForm
 from .. import db
 from ..email import send_email
-from ..models import User, Plugin, PluginConfig, PluginPermission, \
+from ..models import User, Order, Plugin, PluginConfig, PluginPermission, \
                      PluginCommand, PluginEvent
+from datetime import datetime
+
+@main.before_request
+def before_request():
+    if current_user.is_authenticated():
+        current_user.last_seen = datetime.utcnow()
+
 
 @main.route('/')
 def index():
@@ -35,14 +42,22 @@ def order():
             events.append(PluginEvent(action=field['action'],
                                       result=field['result']))
 
-        plugin = Plugin(user_id = current_user.id,
-                        name = form.plugin_name.data,
+        plugin = Plugin(name = form.plugin_name.data,
                         description = form.plugin_desc.data,
                         commands = commands,
                         permissions = permissions,
                         configs = configs,
                         events = events)
         db.session.add(plugin)
+
+        order = Order(plugin_id = plugin.id,
+                      user_id = current_user.id)
+        db.session.add(order)
+        db.session.commit()
+
+        order = Order(plugin_id = plugin.id,
+                      user_id = current_user.id)
+        db.session.add(order)
         db.session.commit()
 
         send_email(current_user.email, 'Success: Your plugin has been listed!',

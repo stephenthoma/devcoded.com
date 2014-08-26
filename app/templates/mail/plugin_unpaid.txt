@@ -1,0 +1,22 @@
+We haven't received any payment for your requested
+plugin!
+
+{{ user.username }}, your plugin, {{
+plugin.name }} must be paid for before development can begin.
+
+In order for development on {{ plugin.name }}
+to begin we need to know that our developer will be paid! Don't
+worry though, your money is held by us until you've received your
+plugin. And, if you're unhappy with the quality of the plugin,
+we're happy to work with you to meet your expectations, or if
+necessary issue a full refund.
+
+You can pay for your plugin from your user
+dashboard by clicking the link below.
+
+Pay for plugin ( https://www.devcoded.com/dashboard )
+
+Thanks for choosing DevCoded LLC.
+
+Unsubscribe ( https://www.devcoded.com/unsubscribe ) from these
+alerts.

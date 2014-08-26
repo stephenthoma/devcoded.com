@@ -13,4 +13,127 @@
   <span id="settings" class="dash-content">
         {% include "dashboard/settings/" + current_user.readable_role() + "_settings.html" ignore missing %}
     </span>
+
+<script id="plugin-table-template" type="text/x-jquery-tmpl">
+<tr>
+  <td><a id="order-${order_id}">${name}</a></td>
+  <td>${description}</td>
+  <td><i class="fa fa-dot-circle-o ${status}"</td>
+</tr>
+</script>
+
+<script id="plugin-detail-template" type="text/x-jquery-tmpl">
+<div class="col-sm-12">
+  <div class="group-topper infobar clearfix">
+    <div class="col-sm-3">
+      <h4 class="text-left">${name}</h4>
+    </div>
+    <div class="col-sm-2">
+      <h5><i class="fa fa-calendar"></i>: ${eta}</h5>
+    </div>
+    <div class="col-sm-7">
+      <h5><strong>Status:</strong>${status}</h5>
+    </div>
+  </div>
+  <div class="col-sm-12 group">
+    <ul class="cbp_tmtimeline cbp_tmmiddle">
+      {% raw %} {{tmpl(updates) "#plugin-update-template"}} {% endraw %}
+    </ul>
+  </div>
+</div>
+</script>
+
+<script id="plugin-update-template" type="text/x-jquery-tmpl">
+<li>
+  <div class="cbp_tmicon">
+    <i class="fa fa-circle"></i>
+  </div>
+  <div class="cbp_tmlabel">
+    <p>${description}</p>
+    <span class="pull-right timestamp">&mdash;${created}</span>
+  </div>
+</li>
+</script>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/lib/jquery.tmpl.js') }}"></script>
+
+<script>
+String.prototype.trunc = String.prototype.trunc ||
+      function(n){
+          return this.length>n ? this.substr(0,n-1)+'&hellip;' : this;
+      };
+
+window.orders = [];
+function getUserPlugins(user_id) {
+  getUserOrders(user_id).done( function(r) {
+    var order_ids = r.data.order_ids;
+    for (var i=0, len = order_ids.length; i < len; i++) {
+      getOrder(order_ids[i]).done( function(r) {
+        var order_id = r.data.id;
+        var plugin_id = r.data.plugin_id;
+        var order_price = r.data.price;
+        var order_paid = Boolean(r.data.paid);
+        getPlugin(plugin_id).done( function(r) {
+          var order = {
+                       order_id: order_id,
+                       name: r.data.name,
+                       description: r.data.description.trunc(85),
+                       full_description: r.data.description,
+                       developer: r.data.developer,
+                       updates: r.data.updates,
+                       paid: order_paid,
+                       price: order_price
+                       };
+          window.orders.push(order);
+          insertTablePlugin(order);
+          $('#no-plugins').remove()
+        })
+      })
+    }
+  });
+}
+
+function insertTablePlugin(plugin) {
+  var rendered_template = $('#plugin-table-template').tmpl(plugin);
+  $('#plugin-table').append(rendered_template);
+  pluginDetailOnClick(plugin);
+};
+
+function pluginDetailOnClick(plugin) {
+  var rendered_template = $('#plugin-detail-template').tmpl(plugin);
+  $("#order-" + plugin.order_id).on("click", function(e) {
+    e.preventDefault();
+    $('#plugin-detail').empty();
+    $('#plugin-detail').append(rendered_template);
+  })
+}
+
+function getUserOrders(user_id) {
+  return $.ajax({
+    url: "/api/users/" + user_id + "/orders/",
+    context: document.body
+    });
+}
+
+function getOrder(order_id) {
+  return $.ajax({
+      url: "/api/orders/" + order_id,
+      context: document.body
+      });
+}
+
+function getPlugin(plugin_id) {
+  return $.ajax({
+      url: "/api/plugins/" + plugin_id,
+      context: document.body
+      });
+}
+
+$(document).ready(function() {
+  getUserPlugins({{ current_user.id }});
+});
+</script>
 {% endblock %}

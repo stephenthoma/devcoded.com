@@ -1,9 +1,13 @@
-Dear {{ user.username }},
+Please confirm your new email by clicking the link
+below.
 
-To confirm your new email address click on the following link:
+If you have not requested for your email to
+be changed please ignore this message.
 
+Confirm change (
 {{ url_for('auth.change_email', token=token, _external=True) }}
+)
 
-Sincerely,
+— DevCoded Staff
 
-The DevCoded Staff
+Itching for a new plugin? Order a new one today! ( https://www.devcoded.com/order )

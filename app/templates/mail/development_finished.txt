@@ -1,0 +1,17 @@
+Your plugin is ready!
+
+{{ user.username }}, development of your
+plugin, {{ plugin.name }} is done!
+
+Get excited! Your plugin is ready. The files
+can be accessed from your user dashboard, which you can reach
+from the link below. If you need any help with the installation,
+or are unsatisfied with anything, just let us know at
+contact@devcoded.com
+
+Download your plugin ( https://www.devcoded.com/dashboard )
+
+Thanks for choosing DevCoded LLC.
+
+Unsubscribe ( https://www.devcoded.com/unsubscribe ) from these
+alerts.

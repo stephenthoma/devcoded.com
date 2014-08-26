@@ -262,6 +262,7 @@ footer span {
   position: fixed;
   left: 0px;
   z-index: -2;
+  width: 100%;
 
   -webkit-user-select:none;
    -khtml-user-select:none;
@@ -410,6 +411,9 @@ footer span {
   border: 1px solid #e0e0e0;
   background-color: #ffffff;
 }
+.textbox-wrap .input-group.error {
+  border: 2px solid rgba(232, 103, 86, 0.8)
+}
 .textbox-wrap .input-group .input-group-addon,
 .textbox-wrap .input-group input,
 .textbox-wrap .input-group .form-control {
@@ -478,20 +482,127 @@ footer span {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
   background-color: white;
 }
-
 .form-error-box span {
   display: flex;
   padding-left: 5px;
+  padding-right: 10px;
   text-align: left;
 }
+.form-error-box .close {
+  line-height: 19px;
+}
 
+/* ---- FORM: PAY ---- */
+.pay-form-section {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  margin-top: 12%;
+}
+
+.pay-form-section .expiration .col-sm-3 {
+  margin-left: 10px;
+  padding: 0;
+}
+
+.pay-form-section .expiration .col-sm-6 {
+  padding-right: 0;
+}
+
+.pay-form-section .expiration .cc-ey,.cc-em {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.pay-form-section .form-action p {
+  margin-bottom: 0px;
+  line-height:35px;
+}
+
+.pay-form-section .form-action span {
+  font-weight: 700;
+}
+
+.secure-logo {
+  height: 66%;
+  width: 66%;
+  padding-top: 20px;
+}
+
+.cc-question {
+  padding: 0 !important;
+  margin-left: -7px;
+  line-height: 35px;
+}
+
+.pay-form-section button {
+  -webkit-appearance: none;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
+  outline: 0;
+  position: relative;
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
+}
+.pay-form-section button:before {
+  content: "";
+  opacity: 0;
+  background-image: url(data:image/gif;base64,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);
+  position: absolute;
+  top: 8px;
+  left: 40px;
+  width: 15px;
+  height: 15px;
+  -webkit-transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) all;
+}
+.pay-form-section button.loading {
+  padding-left: 30px;
+}
+.pay-form-section button.loading:before {
+  left: 9px;
+  opacity: 1;
+}
+
+/* ---- RECEIPT ---- */
+.receipt-section {
+  width: 100%;
+  background-color: white;
+  padding: 75px;
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: 12%;
+}
+.receipt-section h3 {
+  margin: 0;
+  margin-top: 3px;
+  color: rgba(153, 153, 153, 1.0);
+  text-transform: uppercase;
+}
+.receipt-section .receipt-header {
+  padding-bottom: 75px;
+}
+.receipt-section .receipt-footer {
+  padding-top: 175px;
+}
+.receipt-section .receipt-footer span {
+  display: block;
+  text-align: right;
+  margin-right: 25px;
+}
+.receipt-section h5 {
+  display: block;
+  text-align: left;
+  padding-left: 65px;
+  text-transform: uppercase;
+}
 
 /* ---- FORM: REGISTER ---- */
 .register-form-section {
   width: 100%;
   max-width: 360px;
   margin: 0 auto;
-  margin-top: 12%
+  margin-top: 12%;
 }
 
 .register-form-section .textbox-wrap {

@@ -1,10 +1,11 @@
-Welcome to DevCoded!
-Your account has been created, {{ user.username }}.
+Please confirm your email address by clicking the link
+below.
 
-To start using our service please confirm your email by going to the following link!
-{{ url_for('auth.confirm', token=token, _external=True) }}
+We may need to send you information about your plugins.
+It is important that we have an accurate email address.
 
-Sincerely,
+Confirm email address ( {{ url_for('auth.confirm', token=token, _external=True) }} )
 
-The DevCoded Staff
+— DevCoded Staff
 
+Already confirmed? Head over to your dashboard ( https://www.devcoded.com/dashboard ) to use your account.
