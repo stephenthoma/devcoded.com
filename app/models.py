@@ -12,6 +12,12 @@ class Role():
     DEV   = 0x02
     USER  = 0x01
 
+class Status():
+    CREATED = 0x00
+    START = 0x01
+    IN_PROGRESS = 0x02
+    DONE = 0x03
+
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -23,13 +29,6 @@ class User(UserMixin, db.Model):
     confirmed = db.Column(db.Boolean, default=False)
     about_Me = db.Column(db.String(150))
     last_seen = db.Column(db.DateTime, default = datetime.utcnow())
-
-    def readable_role(self):
-        roles = {1:'User', 2:'Developer', 3:'Administrator'}
-        for r in roles:
-            if r == self.role:
-                return roles[r]
-        return "Undefined"
 
     def readable_role(self):
         roles = {1:'User', 2:'Developer', 3:'Administrator'}
@@ -265,12 +264,20 @@ class Plugin(db.Model):
     developer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     name = db.Column(db.String(64))
     description = db.Column(db.Text)
+    status = db.Column(db.Integer, default=0)
     commands = db.relationship('PluginCommand')
     permissions = db.relationship('PluginPermission')
     configs = db.relationship('PluginConfig')
     events = db.relationship('PluginEvent')
     updates = db.relationship('PluginUpdate')
     files = db.relationship('PluginFile')
+
+    def readable_status(self):
+      status = {0:'Created', 1:'Start', 2:'In Progress', 3:'Finished'}
+      for s in status:
+        if s == self.status:
+          return status[r]
+      return "Undefined"
 
     def _to_json_helper(self, object):
         x = list()

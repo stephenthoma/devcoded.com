@@ -1,8 +1,7 @@
 from flask.ext.wtf import Form
 from wtforms import Form as insecureForm
-from wtforms import StringField, TextAreaField, BooleanField, SelectField, \
-                    SubmitField, ValidationError, FormField, FieldList
-from wtforms.validators import DataRequired, Length, Email, Regexp
+from wtforms import StringField, TextAreaField, FormField, FieldList
+from wtforms.validators import DataRequired, Length, Optional
 
 # insecureForm doesn't have CSRF! Only use in FormFields
 # that will be subforms of normal, secure, forms.
@@ -13,8 +12,8 @@ class CommandForm(insecureForm):
     command_desc = StringField('Command description', validators=[DataRequired(), Length(1, 128)])
 
 class PermissionsForm(insecureForm):
-    permission_name = StringField('Permission name', validators=[DataRequired(), Length(1, 32)])
-    permission_desc = StringField('Permission description', validators=[DataRequired(), Length(1, 128)])
+    permission_name = StringField('Permission name', validators=[Optional(), Length(1, 32)])
+    permission_desc = StringField('Permission description', validators=[Optional()])
 
 class ConfigurationForm(insecureForm):
     config_name = StringField('Configuration option', validators=[DataRequired(), Length(1, 32)])
