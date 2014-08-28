@@ -276,8 +276,15 @@ class Plugin(db.Model):
       status = {0:'Created', 1:'Start', 2:'In Progress', 3:'Finished'}
       for s in status:
         if s == self.status:
-          return status[r]
+          return status[s]
       return "Undefined"
+
+    def icon_status(self):
+      status = {0:'fa-times-circle', 1:'fa-spinner', 2:'fa-tachometer', 3:'fa-check-circle'}
+      for s in status:
+        if s == self.status:
+          return status[s]
+      return "fa-exclamation-triangle"
 
     def _to_json_helper(self, object):
         x = list()
