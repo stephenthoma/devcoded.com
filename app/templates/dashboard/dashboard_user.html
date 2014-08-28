@@ -47,11 +47,9 @@ function getUserPlugins(user_id) {
             price: order_price
           };
 
-          var username = r.data.developer;
-          getUser(username).done( function(s) {
-            username = s.data.username;
+          getUser(r.data.developer).done( function(s) {
+            order.developer = s.data.username;
           }).always(function (){
-            order.developer = username;
             window.orders.push(order);
             insertTablePlugin(order);
             $('#no-plugins').remove()
