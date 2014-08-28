@@ -47,7 +47,6 @@
         {% endif %}
       {% endwith %}
       {% block dash_content %}
-
       {% endblock %}
     </div>
   </div>
@@ -55,6 +54,63 @@
 
 {% block scripts %}
   {{ super() }}
+
+  <script id="plugin-table-template" type="text/x-jquery-tmpl">
+    <tr>
+      <td><a id="order-${order_id}">${name}</a></td>
+      <td>${description}</td>
+      <td><i class="fa fa-dot-circle-o ${status}"</td>
+    </tr>
+  </script>
+
+  <script id="plugin-detail-template" type="text/x-jquery-tmpl">
+    <div class="col-sm-12">
+      <div class="group-topper infobar clearfix">
+        <div class="col-sm-3">
+          <h4 class="text-left">${name}</h4>
+        </div>
+        <div class="col-sm-2">
+          <h5><strong>Developer: </strong>
+            {% raw %}
+              {{if developer}}${developer}
+              {{else}}None assigned
+              {{/if}}
+            {% endraw %}
+          </h5>
+        </div>
+        <div class="col-sm-2">
+          <h5><i class="fa fa-calendar"></i>:
+            {% raw %}
+              {{if eta}}${eta}
+              {{else}}Undecided
+              {{/if}}
+            {% endraw %}
+          </h5>
+        </div>
+        <div class="col-sm-5">
+          <h5><strong>Status:</strong>${status}</h5>
+        </div>
+      </div>
+      <div class="col-sm-12 group">
+        <ul class="cbp_tmtimeline cbp_tmmiddle">
+          {% raw %} {{tmpl(updates) "#plugin-update-template"}} {% endraw %}
+        </ul>
+      </div>
+    </div>
+  </script>
+
+  <script id="plugin-update-template" type="text/x-jquery-tmpl">
+    <li>
+      <div class="cbp_tmicon">
+        <i class="fa fa-circle"></i>
+      </div>
+      <div class="cbp_tmlabel">
+        <p>${description}</p>
+        <span class="pull-right timestamp">&mdash;${created}</span>
+      </div>
+    </li>
+  </script>
+
   <script>
     $(document).ready(function () {
       hideAll();
