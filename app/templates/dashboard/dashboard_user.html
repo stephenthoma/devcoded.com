@@ -37,18 +37,25 @@ function getUserPlugins(user_id) {
         var order_paid = Boolean(r.data.paid);
         getPlugin(plugin_id).done( function(r) {
           var order = {
-                       order_id: order_id,
-                       name: r.data.name,
-                       description: r.data.description.trunc(85),
-                       full_description: r.data.description,
-                       developer: r.data.developer,
-                       updates: r.data.updates,
-                       paid: order_paid,
-                       price: order_price
-                       };
-          window.orders.push(order);
-          insertTablePlugin(order);
-          $('#no-plugins').remove()
+            order_id: order_id,
+            name: r.data.name,
+            description: r.data.description.trunc(85),
+            full_description: r.data.description,
+            developer: r.data.developer,
+            updates: r.data.updates,
+            paid: order_paid,
+            price: order_price
+          };
+
+          var username = r.data.developer;
+          getUser(username).done( function(s) {
+            username = s.data.username;
+          }).always(function (){
+            order.developer = username;
+            window.orders.push(order);
+            insertTablePlugin(order);
+            $('#no-plugins').remove()
+          });
         })
       })
     }
@@ -75,6 +82,13 @@ function getUserOrders(user_id) {
     url: "/api/users/" + user_id + "/orders/",
     context: document.body
     });
+}
+
+function getUser(user_id) {
+  return $.ajax({
+    url: "/api/users/" + user_id,
+    context: document.body
+  });
 }
 
 function getOrder(order_id) {
