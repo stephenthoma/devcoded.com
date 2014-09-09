@@ -59,7 +59,21 @@
     <tr>
       <td><a id="order-${order_id}">${name}</a></td>
       <td>${description}</td>
-      <td><i class="fa fa-dot-circle-o">${status}</td>
+      <td><i class="fa
+      {% raw %}
+        {{if status == '3'}}
+          {{if paid == '0'}}fa-usd
+          {{else}}fa-check-circle
+          {{/if}}
+        {{else}}
+          {{if paid == '1'}}fa-spinner fa-spin
+          {{else !developer}}fa-times-circle
+          {{else}}fa-question ${developer} ${paid}
+          {{/if}}
+        {{/if}}
+        ${status}"></i>
+      {% endraw %}
+      </td>
     </tr>
   </script>
 
