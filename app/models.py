@@ -296,6 +296,7 @@ class Plugin(db.Model):
                 'name': self.name,
                 'developer': self.user_id,
                 'description': self.description,
+                'status': self.status,
                 'commands': self._to_json_helper(self.commands),
                 'permissions': self._to_json_helper(self.permissions),
                 'configs': self._to_json_helper(self.configs),
