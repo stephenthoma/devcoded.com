@@ -61,17 +61,7 @@
       <td>${description}</td>
       <td><i class="fa
       {% raw %}
-        {{if status == '3'}}
-          {{if paid == '0'}}fa-usd
-          {{else}}fa-check-circle
-          {{/if}}
-        {{else}}
-          {{if paid == '1'}}fa-spinner fa-spin
-          {{else !developer}}fa-times-circle
-          {{else}}fa-question ${developer} ${paid}
-          {{/if}}
-        {{/if}}
-        ${status}"></i>
+        ${getIcon(status, paid, developer)}
       {% endraw %}
       </td>
     </tr>
@@ -156,5 +146,25 @@
     function hide(id) {
       $("#" + id).hide();
     }
+
+    function getIcon(status, paid, developer){
+      alert("test");
+      if (status == '3'){
+        if (paid == '0') {
+          return fa - usd;
+        } else {
+          return fa-check-circle;
+        }
+      } else {
+        if (paid == '1') {
+          return fa - spinner fa - spin;
+        } else if (!developer){
+          return fa-times-circle;
+        } else {
+          return fa-question;
+        }
+      }
+    }
+
   </script>
 {% endblock %}
