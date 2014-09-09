@@ -17,14 +17,8 @@
 
 {% block scripts %}
 {{ super() }}
-<script src="{{ url_for('static', filename='js/lib/jquery.tmpl.js') }}"></script>
 
 <script>
-String.prototype.trunc = String.prototype.trunc ||
-      function(n){
-          return this.length>n ? this.substr(0,n-1)+'&hellip;' : this;
-      };
-
 window.orders = [];
 function getUserPlugins(user_id) {
   getUserOrders(user_id).done( function(r) {
@@ -60,21 +54,6 @@ function getUserPlugins(user_id) {
       })
     }
   });
-}
-
-function insertTablePlugin(plugin) {
-  var rendered_template = $('#plugin-table-template').tmpl(plugin);
-  $('#plugin-table').append(rendered_template);
-  pluginDetailOnClick(plugin);
-};
-
-function pluginDetailOnClick(plugin) {
-  var rendered_template = $('#plugin-detail-template').tmpl(plugin);
-  $("#order-" + plugin.order_id).on("click", function(e) {
-    e.preventDefault();
-    $('#plugin-detail').empty();
-    $('#plugin-detail').append(rendered_template);
-  })
 }
 
 $(document).ready(function() {

@@ -50,11 +50,8 @@
       {% endblock %}
     </div>
   </div>
-{% endblock %}
 
-{% block scripts %}
-  {{ super() }}
-
+  <!-- Section: TEMPLATES -->
   <script id="plugin-table-template" type="text/x-jquery-tmpl">
     <tr>
       <td><a id="order-${order_id}">${name}</a></td>
@@ -144,99 +141,25 @@
       </div>
     </li>
   </script>
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='js/lib/jquery.tmpl.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 
   <script>
     $(document).ready(function () {
-      hideAll();
-      var start = 'home';
-      var href = $(window.location).attr("href");
-      var index = href.lastIndexOf('#');
-      if (index > -1) {
-        if ($("#" + href.substr(index + 1)).length > 0) {
-          start = href.substr(index + 1);
+        hideAll();
+        var start = 'home';
+        var href = $(window.location).attr("href");
+        var index = href.lastIndexOf('#');
+        if (index > -1) {
+            if ($("#" + href.substr(index + 1)).length > 0) {
+                start = href.substr(index + 1);
         }
-      }
-
-      show(start);
+    }
+    show(start);
     })
-
-    function hideAll() {
-      $('.dash-content').each(function (i, obj) {
-        hide(obj.id);
-      });
-    }
-
-    function show(id) {
-      hide(window["currentPage"]);
-      $("#" + id).show();
-      window["currentPage"] = id;
-      window.history.pushState("", "", "#" + id);
-    }
-
-    function hide(id) {
-      $("#" + id).hide();
-    }
-
-    function getIcon(status, paid, developer){
-      alert("test");
-      if (status == '3'){
-        if (paid == '0') {
-          return "fa-usd";
-        } else {
-          return "fa-check-circle";
-        }
-      } else {
-        if (paid == '1') {
-          return "fa-spinner fa-spin";
-        } else if (!developer){
-          return "fa-times-circle";
-        } else {
-          return "fa-question";
-        }
-      }
-    }
-
-    function getStatus(status){
-      if (status == 0){
-        return "Created";
-      } else if (status == 1){
-        return "Start";
-      } else if (status == 2){
-        return "In Progress";
-      } else if (status == 3){
-        return "Done";
-      } else {
-        return "Undefined";
-      }
-    }
-
-    function getUserOrders(user_id) {
-      return $.ajax({
-        url: "/api/users/" + user_id + "/orders/",
-        context: document.body
-      });
-    }
-
-    function getUser(user_id) {
-      return $.ajax({
-        url: "/api/users/" + user_id,
-        context: document.body
-      });
-    }
-
-    function getOrder(order_id) {
-      return $.ajax({
-        url: "/api/orders/" + order_id,
-        context: document.body
-      });
-    }
-
-    function getPlugin(plugin_id) {
-      return $.ajax({
-        url: "/api/plugins/" + plugin_id,
-        context: document.body
-      });
-    }
-
   </script>
 {% endblock %}
