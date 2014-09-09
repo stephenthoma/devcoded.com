@@ -46,6 +46,14 @@
           </div>
         {% endif %}
       {% endwith %}
+
+      <span id="home" class="dash-content">
+        {% include "dashboard/home/" + current_user.readable_role() + "_home.html" ignore missing %}
+      </span>
+      <span id="settings" class="dash-content">
+        {% include "dashboard/settings/" + current_user.readable_role() + "_settings.html" ignore missing %}
+      </span>
+
       {% block dash_content %}
       {% endblock %}
     </div>
