@@ -69,18 +69,19 @@
 
   <script id="plugin-detail-template" type="text/x-jquery-tmpl">
     <div class="col-sm-12">
-      <div class="group-topper infobar clearfix">
-        <div class="col-sm-3">
+      <div class="group-topper infobar row clearfix">
+        <div class="col-sm-2">
           <h4 class="text-left">${name}</h4>
         </div>
         <div class="col-sm-2">
-          {% raw %}
-            {{if developer}}
-              <h5><strong>Developer: </strong>
+          <h5><strong>Developer: </strong>
+            {% raw %}
+              {{if developer}}
                 ${developer}
-              </h5>
-            {{/if}}
+              {{else}} None assigned
+              {{/if}}
           {% endraw %}
+          </h5>
         </div>
         <div class="col-sm-2">
           <h5><i class="fa fa-calendar"></i>:
@@ -95,8 +96,8 @@
           <h5><strong>Status: </strong>{% raw %}${getStatus(status)} {% endraw %}</h5>
         </div>
       </div>
-      <div class="group-topper infobar clearfix">
-        <div class="col-sm-4">
+      <div class="group-topper infobar row clearfix">
+        <div class="col-sm-6">
           <h5><strong>Price: </strong>
             {% raw %}
               {{if price}}$${price}
@@ -110,7 +111,7 @@
             {% endraw %}
           </h5>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
           <h5><strong>Files: </strong>
             <select id='plugin-files'>
               {% raw %}
