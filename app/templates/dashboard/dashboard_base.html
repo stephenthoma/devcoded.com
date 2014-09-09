@@ -74,13 +74,13 @@
           <h4 class="text-left">${name}</h4>
         </div>
         <div class="col-sm-2">
-          <h5><strong>Developer: </strong>
-            {% raw %}
-              {{if developer}}${developer}
-              {{else}}None assigned
-              {{/if}}
-            {% endraw %}
-          </h5>
+          {% raw %}
+            {{if developer}}
+              <h5><strong>Developer: </strong>
+                ${developer}
+              </h5>
+            {{/if}}
+          {% endraw %}
         </div>
         <div class="col-sm-2">
           <h5><i class="fa fa-calendar"></i>:
