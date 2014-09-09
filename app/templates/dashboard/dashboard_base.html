@@ -151,17 +151,17 @@
       alert("test");
       if (status == '3'){
         if (paid == '0') {
-          return fa - usd;
+          return "fa-usd";
         } else {
-          return fa-check-circle;
+          return "fa-check-circle";
         }
       } else {
         if (paid == '1') {
-          return fa - spinner fa - spin;
+          return "fa-spinner fa-spin";
         } else if (!developer){
-          return fa-times-circle;
+          return "fa-times-circle";
         } else {
-          return fa-question;
+          return "fa-question";
         }
       }
     }
