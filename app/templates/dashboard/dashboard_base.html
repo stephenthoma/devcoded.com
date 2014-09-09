@@ -92,7 +92,36 @@
           </h5>
         </div>
         <div class="col-sm-5">
-          <h5><strong>Status:</strong>${status}</h5>
+          <h5><strong>Status: </strong>{% raw %}${getStatus(status)} {% endraw %}</h5>
+        </div>
+      </div>
+      <div class="group-topper infobar clearfix">
+        <div class="col-sm-4">
+          <h5><strong>Price: </strong>
+            {% raw %}
+              {{if price}}$${price}
+                {{if paid}} paid <i class="fa fa-check"></i>
+                {{/if}}
+              {{else}}
+                {{if paid}} Free!
+                {{else}} None set
+                {{/if}}
+              {{/if}}
+            {% endraw %}
+          </h5>
+        </div>
+        <div class="col-sm-4">
+          <h5><strong>Files: </strong>
+            <select id='plugin-files'>
+              {% raw %}
+                <option value="-1">Choose a file</option>
+                {{each files}}
+                  <option value="${$index}">${$value.url}</option>
+                {{/each}}
+              {% endraw %}
+            </select>
+            <button class="custom-btn">Download</button>
+          </h5>
         </div>
       </div>
       <div class="col-sm-12 group">
@@ -164,6 +193,48 @@
           return "fa-question";
         }
       }
+    }
+
+    function getStatus(status){
+      if (status == 0){
+        return "Created";
+      } else if (status == 1){
+        return "Start";
+      } else if (status == 2){
+        return "In Progress";
+      } else if (status == 3){
+        return "Done";
+      } else {
+        return "Undefined";
+      }
+    }
+
+    function getUserOrders(user_id) {
+      return $.ajax({
+        url: "/api/users/" + user_id + "/orders/",
+        context: document.body
+      });
+    }
+
+    function getUser(user_id) {
+      return $.ajax({
+        url: "/api/users/" + user_id,
+        context: document.body
+      });
+    }
+
+    function getOrder(order_id) {
+      return $.ajax({
+        url: "/api/orders/" + order_id,
+        context: document.body
+      });
+    }
+
+    function getPlugin(plugin_id) {
+      return $.ajax({
+        url: "/api/plugins/" + plugin_id,
+        context: document.body
+      });
     }
 
   </script>

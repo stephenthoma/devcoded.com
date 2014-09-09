@@ -43,6 +43,7 @@ function getUserPlugins(user_id) {
             full_description: r.data.description,
             developer: r.data.developer,
             updates: r.data.updates,
+            files: r.data.files,
             status: r.data.status,
             paid: order_paid,
             price: order_price
@@ -74,34 +75,6 @@ function pluginDetailOnClick(plugin) {
     $('#plugin-detail').empty();
     $('#plugin-detail').append(rendered_template);
   })
-}
-
-function getUserOrders(user_id) {
-  return $.ajax({
-    url: "/api/users/" + user_id + "/orders/",
-    context: document.body
-    });
-}
-
-function getUser(user_id) {
-  return $.ajax({
-    url: "/api/users/" + user_id,
-    context: document.body
-  });
-}
-
-function getOrder(order_id) {
-  return $.ajax({
-      url: "/api/orders/" + order_id,
-      context: document.body
-      });
-}
-
-function getPlugin(plugin_id) {
-  return $.ajax({
-      url: "/api/plugins/" + plugin_id,
-      context: document.body
-      });
 }
 
 $(document).ready(function() {
